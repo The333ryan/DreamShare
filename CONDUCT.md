@@ -14,26 +14,26 @@ diverse, inclusive, and healthy community.
 
 ## Our Standards
 
+Our code of conduct emphasizes professionalism, collaboration, responsibility, 
+ethics, and well-being. Team members should treat each other with respect, 
+communicate openly, and support one another in achieving our goals. Everyone 
+is accountable for their actions and should strive to produce high-quality 
+work while maintaining confidentiality and fairness. We also value work-life
+balance and mental well-being, encouraging practices that promote a healthy 
+and positive team environment.
 
-## Enforcement Responsibilities
+## Scrum Master Responsibilities
 
+The Scrum master will be in charge of organizing tasks and making sure every
+member of the group is contributing to the project as well as making sufficient
+progress towards the end goal of a fully functional.
 
-## Scope
+## Warnings
 
-
-## Enforcement
-
-
-## Enforcement Guidelines
-
-
-### 1. Corrections
-
-
-### 2. Warnings
-
-
-### 3. Temporary Bans
-
+If a group member is not contributing equally to the project, it is the responsibility 
+of the other group members to notify that individual. They must hold the member 
+accountable for completing the tasks assigned by the Scrum Master.
 
 ## Attribution
+
+Derived from: https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md
