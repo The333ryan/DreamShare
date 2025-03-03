@@ -7,3 +7,18 @@
 -- **Statement:**   
 -- **Supporting Data:**  
 -- **Team Action:**  
+
+## Observation #3  
+-- **Statement:** 
+-- **Supporting Data:**  
+-- **Team Action:**  
+
+## Observation #4  
+-- **Statement:**   
+-- **Supporting Data:**  
+-- **Team Action:**  
+
+## Observation #5  
+-- **Statement:**   
+-- **Supporting Data:**  
+-- **Team Action:**  
