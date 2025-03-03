@@ -37,3 +37,8 @@ accountable for completing the tasks assigned by the Scrum Master.
 ## Attribution
 
 Derived from: https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md
+
+## Signatures
+**Aidan DelSignore**
+## Contributor Covenant Label
+https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg
