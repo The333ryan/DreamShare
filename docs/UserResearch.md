@@ -24,9 +24,9 @@
 -- **Team Action:**  
 
 ## Observation #3  
--- **Statement:** 
--- **Supporting Data:**  
--- **Team Action:**  
+-- **Statement:** A lot of people do believe that there are meanings to their dreams, and the majority of respondents have considered sharing them.  
+-- **Supporting Data:** Out of 49 respondents, 24 said "Yes" that they believe dreams have meanings, and 30 said "Yes" having considered sharing their dreams.  
+-- **Team Action:** Try and interpret the meaning of users' dreams, and allow them to share their dreams with other users. 
 
 ## Observation #4  
 -- **Statement:**   
