@@ -14,11 +14,11 @@
 -- **Team Action:** Try and interpret the meaning of users' dreams, and allow them to share their dreams with other users. 
 
 ## Observation #4  
--- **Statement:**   Many respondents do not place significant value on their dreams
--- **Supporting Data:**  40.8% of participants expressed disinterest in dreams in some way, either by not believing they have meaning, not sharing them, or not keeping a dream journal.
--- Many participants who do not keep a dream journal also do not share their dreams with others, reinforcing the idea that they see little significance in them.
--- **Team Action:**  Develop an approach to highlight the potential benefits of dream analysis, such as emotional processing or creativity 
--- Investigate why people do not value their dreams—whether due to skepticism, lack of relevance, or cultural beliefs.
+-- **Statement:**   Many respondents do not place significant value on their dreams  
+-- **Supporting Data:**  40.8% of participants expressed disinterest in dreams in some way, either by not believing they have meaning, not sharing them, or not keeping a dream journal.  
+-- Many participants who do not keep a dream journal also do not share their dreams with others, reinforcing the idea that they see little significance in them.  
+-- **Team Action:**  Develop an approach to highlight the potential benefits of dream analysis, such as emotional processing or creativity   
+-- Investigate why people do not value their dreams—whether due to skepticism, lack of relevance, or cultural beliefs.  
 
 ## Observation #5  
 -- **Statement:**   
