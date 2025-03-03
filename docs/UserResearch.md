@@ -21,6 +21,7 @@
 -- Investigate why people do not value their dreams—whether due to skepticism, lack of relevance, or cultural beliefs.  
 
 ## Observation #5  
--- **Statement:**   
--- **Supporting Data:**  
--- **Team Action:**  
+-- **Statement:**   There are a lot of people who have anxiety provoking dreams
+-- **Supporting Data:**  This includes dreams about dying, being robbed, and getting in fights
+-- **Team Action:**  We could try and implement a tag system where the user can tag a dream as anxiety/fear
+
