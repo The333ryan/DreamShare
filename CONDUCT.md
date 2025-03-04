@@ -42,5 +42,6 @@ Derived from: https://www.contributor-covenant.org/version/2/1/code_of_conduct/c
 **Aidan DelSignore**  
 **Sean Chin**  
 **Michael Dey**  
+**Ryan Miner**  
 ## Contributor Covenant Label
 https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg
