@@ -9,17 +9,17 @@
 - **Variants:** There are two main variants, a lighter purple and a darker purple
 
 ### Test 2
-- **Different Background Colors**
+- **Dream Layouts**
 - **US2**
-- **Metrics:** 
-- **Hypothesis:** 
-- **Experiment:** 
-- **Variants:** 
+- **Metrics:** Retention and Net Promoter Score
+- **Hypothesis:** We aim t identify which UI layout encourages users to engage with the app more frequently. While this issue might not feel immedately relevant to our users, it hold significant value for us as developers who want to maximize app usage. **If users are exposed to Dream Layout A, they may find it more intuitive and engaging, whereas Dream Layout B might provide a visually appealing and structured experience**.
+- **Experiment:** Since our app features a consistent layout design, we will test user preferences by presenting two different options.
+- **Variants:** The two main variants are Dream Layout A which emphasizes intuitive navigation, and Dream Layout B, which focuses on visual structure and aesthetic appeal.
 
 ### Test 3
-- **Different Background Colors**
-- **US3**
-- **Metrics:** 
+- **Push Notification Time**
+- **US3** 
+- **Metrics:** Retention and Net Promoter Score
 - **Hypothesis:** 
 - **Experiment:** 
 - **Variants:**
