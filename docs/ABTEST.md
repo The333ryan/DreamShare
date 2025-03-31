@@ -27,12 +27,12 @@
   30 minutes before
 
 ### Test 4
-- **Different Background Colors**
+- **Tip Button Location**
 - **US4**
-- **Metrics:** 
-- **Hypothesis:** 
-- **Experiment:** 
-- **Variants:**
+- **Metrics:** Retention, NPS
+- **Hypothesis:** We want to see what users prefer, the tip button as a floating button on the DreamList page, or as an additional button in the navbar at the bottom. In theory, one will be more preferred to the other, and the goal is to see which.
+- **Experiment:** A: Tip button as a floating button on the DreamList page, B: Tip button located on the NavBar like the profile button. The only thing affected is where this button is placed, which will slightly affect navigation on the tips page. 
+- **Variants:** A: Floating button, B: Navbar button.
 
 ### Test 5
 - **Different Background Colors**
