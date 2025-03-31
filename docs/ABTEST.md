@@ -19,10 +19,12 @@
 ### Test 3
 - **Push Notification Time**
 - **US3** 
-- **Metrics:** Retention and Net Promoter Score
-- **Hypothesis:** 
-- **Experiment:** 
-- **Variants:**
+- **Metrics:** Notification Open Rate, 7-Day User Retention
+- **Hypothesis:** Sending notifications at different times before bedtime or wake-up time may influence how likely users are to open the app and return consistently. We believe that sending notifications earlier gives users more time to act, increasing engagement.
+- **Experiment:** Users will be split into groups receiving notifications at different times before their scheduled bedtime and wake-up time. We will measure how often they open the app after receiving a notification and how frequently they return over a 7-day period
+- **Variants:** 5 minutes before
+  15 minutes before (control)
+  30 minutes before
 
 ### Test 4
 - **Different Background Colors**
