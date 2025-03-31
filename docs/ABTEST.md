@@ -35,9 +35,9 @@
 - **Variants:** A: Floating button, B: Navbar button.
 
 ### Test 5
-- **Different Background Colors**
+- **Different Logos**
 - **US5**
-- **Metrics:** 
-- **Hypothesis:** 
-- **Experiment:** 
-- **Variants:** 
+- **Metrics:** Brand Recall, Retention, and Net Promoter Score
+- **Hypothesis:** The logo plays a key role in shaping users' perception of the app. A more modern and sleek logo design may resonate better with users, leading to stronger brand recall and higher engagement. If users are shown Logo A, which emphasizes minimalism, they may find it more appealing, whereas Lgo B, with its bold and vibrant design, might create a stronger visual impression.
+- **Experiment:** Display different logos to users during their app experience and measure their responses to each variant.
+- **Variants:** Variant A: A modern, minimalist logo with clean lines. Variant B: B will be a bold, vibrant logo with dynamic elements.
