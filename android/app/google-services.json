@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "957845781495",
+    "project_id": "dreamshare-85b9a",
+    "storage_bucket": "dreamshare-85b9a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:957845781495:android:6c422fdbc180ec5f934cf2",
+        "android_client_info": {
+          "package_name": "com.mycompany.dreamshare"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6nFxHWsThC58zuW-AE2FHS_TnZ8epkFo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
