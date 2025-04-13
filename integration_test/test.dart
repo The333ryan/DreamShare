@@ -35,8 +35,8 @@ void main() async {
 
   testWidgets('AI Interpretation', (WidgetTester tester) async {
     _overrideOnError();
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: 'michael.dey@uri.edu', password: '21aaaa');
+    await FirebaseAuth.instance
+        .signInWithEmailAndPassword(email: 'mike@uri.edu', password: '21aaaa');
     await tester.pumpWidget(ChangeNotifierProvider(
       create: (context) => FFAppState(),
       child: MyApp(
@@ -47,6 +47,7 @@ void main() async {
 
     await tester.pumpAndSettle(const Duration(milliseconds: 5000));
     await tester.tap(find.byKey(const ValueKey('Dream_p4rs')));
+    await tester.pumpAndSettle(const Duration(milliseconds: 5000));
     await tester.tap(find.byKey(const ValueKey('AIButton_ttja')));
   });
 
@@ -159,6 +160,8 @@ void main() async {
         find.byKey(const ValueKey('TextField_iqmm')), 'Testing unit test');
     await tester.tap(find.byKey(const ValueKey('Button_uozq')));
     await tester.tap(find.byIcon(Icons.person));
+    await tester.pump(kDoubleTapMinTime);
+    await tester.tap(find.byIcon(Icons.person));
     await tester.tap(find.byKey(const ValueKey('IconButton_eqf7')));
     await tester.tap(find.byKey(const ValueKey('Button_kd1j')));
   });
@@ -175,12 +178,19 @@ void main() async {
     await GoogleFonts.pendingFonts();
 
     await tester.pumpAndSettle(const Duration(milliseconds: 5000));
-    await tester.tap(find.byKey(const ValueKey('TextField_l7tb')));
-    await tester.pump(kDoubleTapMinTime);
-    await tester.tap(find.byKey(const ValueKey('TextField_l7tb')));
+    await tester.tap(find.byKey(const ValueKey('AuthPage_aaz3')));
     await tester.pumpAndSettle(const Duration(milliseconds: 5000));
     await tester.enterText(
         find.byKey(const ValueKey('TextField_l7tb')), 'vfaywolfe@@uri.edu');
+    await tester.pumpAndSettle(const Duration(milliseconds: 5000));
+    await tester.tap(find.byKey(const ValueKey('TextField_jg6d')));
+    await tester.pumpAndSettle(const Duration(milliseconds: 5000));
+    await tester.enterText(
+        find.byKey(const ValueKey('TextField_jg6d')), 'password');
+    await tester.pumpAndSettle(const Duration(milliseconds: 5000));
+    await tester.tap(find.byKey(const ValueKey('Button_j5sl')));
+    await tester.pumpAndSettle(const Duration(milliseconds: 5000));
+    expect(find.text('Please check email format.'), findsWidgets);
   });
 }
 
