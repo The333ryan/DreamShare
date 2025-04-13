@@ -3,15 +3,13 @@ import 'search_user_widget.dart' show SearchUserWidget;
 import 'package:flutter/material.dart';
 
 class SearchUserModel extends FlutterFlowModel<SearchUserWidget> {
-  ///  Local state fields for this component.
-
-  String displayName = 'Name';
-
   ///  State fields for stateful widgets in this component.
 
   // State field(s) for TextField widget.
+  final textFieldKey = GlobalKey();
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
+  String? textFieldSelectedOption;
   String? Function(BuildContext, String?)? textControllerValidator;
 
   @override
@@ -20,6 +18,5 @@ class SearchUserModel extends FlutterFlowModel<SearchUserWidget> {
   @override
   void dispose() {
     textFieldFocusNode?.dispose();
-    textController?.dispose();
   }
 }

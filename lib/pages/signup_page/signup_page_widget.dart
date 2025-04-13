@@ -1,8 +1,8 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
-import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'signup_page_model.dart';
@@ -118,6 +118,7 @@ class _SignupPageWidgetState extends State<SignupPageWidget> {
                             Container(
                               width: 300.0,
                               child: TextFormField(
+                                key: ValueKey('SU-Email_e48h'),
                                 controller: _model.sUEmailTextController,
                                 focusNode: _model.sUEmailFocusNode,
                                 autofocus: false,
@@ -198,6 +199,7 @@ class _SignupPageWidgetState extends State<SignupPageWidget> {
                             Container(
                               width: 300.0,
                               child: TextFormField(
+                                key: ValueKey('SU-Password_92ks'),
                                 controller: _model.sUPasswordTextController,
                                 focusNode: _model.sUPasswordFocusNode,
                                 autofocus: false,
@@ -292,6 +294,7 @@ class _SignupPageWidgetState extends State<SignupPageWidget> {
                             Container(
                               width: 300.0,
                               child: TextFormField(
+                                key: ValueKey('TextField_s2l2'),
                                 controller:
                                     _model.confirmPasswordTextController,
                                 focusNode: _model.textFieldFocusNode,
@@ -393,6 +396,7 @@ class _SignupPageWidgetState extends State<SignupPageWidget> {
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
                   child: FFButtonWidget(
+                    key: ValueKey('Button_2x3f'),
                     onPressed: () async {
                       logFirebaseEvent('SIGNUP_PAGE_PAGE_SUBMIT_BTN_ON_TAP');
                       logFirebaseEvent('Button_validate_form');

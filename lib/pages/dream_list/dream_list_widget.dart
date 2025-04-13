@@ -3,9 +3,9 @@ import '/backend/backend.dart';
 import '/components/dream/dream_widget.dart';
 import '/components/search_user/search_user_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
-import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dream_list_model.dart';
@@ -62,6 +62,7 @@ class _DreamListWidgetState extends State<DreamListWidget>
           defaultColor: Color(0xFFC155FF),
         ),
         floatingActionButton: FloatingActionButton(
+          key: ValueKey('FloatingActionButton_csqu'),
           onPressed: () async {
             logFirebaseEvent('DREAM_LIST_FloatingActionButton_k6pec3yo');
             logFirebaseEvent('FloatingActionButton_navigate_to');

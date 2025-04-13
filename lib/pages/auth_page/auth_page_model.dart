@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 class AuthPageModel extends FlutterFlowModel<AuthPageWidget> {
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Custom Action - userTimezone] action in AuthPage widget.
-  String? timezoneName;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode1;
   TextEditingController? emailTextController;

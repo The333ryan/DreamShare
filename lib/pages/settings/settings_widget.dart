@@ -1,12 +1,12 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/index.dart';
 import 'package:easy_debounce/easy_debounce.dart';
-import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'settings_model.dart';
@@ -359,6 +359,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 50.0),
                       child: FFButtonWidget(
+                        key: ValueKey('Button_kd1j'),
                         onPressed: () async {
                           logFirebaseEvent('SETTINGS_PAGE_LOGOUT_BTN_ON_TAP');
                           logFirebaseEvent('Button_auth');

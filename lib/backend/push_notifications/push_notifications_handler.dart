@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'serialization_util.dart';
 import '/backend/backend.dart';
-import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import '../../flutter_flow/flutter_flow_util.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -140,6 +140,7 @@ final parametersBuilderMap =
         },
       ),
   'Tips': ParameterData.none(),
+  'Auth2': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

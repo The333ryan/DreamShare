@@ -25,4 +25,10 @@ class FFAppState extends ChangeNotifier {
   set searchText(String value) {
     _searchText = value;
   }
+
+  bool _searchActive = false;
+  bool get searchActive => _searchActive;
+  set searchActive(bool value) {
+    _searchActive = value;
+  }
 }

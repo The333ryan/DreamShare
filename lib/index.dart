@@ -11,3 +11,4 @@ export '/pages/settings/settings_widget.dart' show SettingsWidget;
 export '/pages/view_dream_other/view_dream_other_widget.dart'
     show ViewDreamOtherWidget;
 export '/pages/tips/tips_widget.dart' show TipsWidget;
+export '/auth2/auth2_widget.dart' show Auth2Widget;

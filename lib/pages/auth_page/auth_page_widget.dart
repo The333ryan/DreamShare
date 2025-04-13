@@ -2,11 +2,10 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/nps/nps_widget.dart';
 import '/components/nps2/nps2_widget.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/custom_code/actions/index.dart' as actions;
 import '/index.dart';
-import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'auth_page_model.dart';
@@ -45,18 +44,6 @@ class _AuthPageWidgetState extends State<AuthPageWidget> {
 
   @override
   void dispose() {
-    // On page dispose action.
-    () async {
-      logFirebaseEvent('AUTH_PAGE_PAGE_AuthPage_ON_DISPOSE');
-      logFirebaseEvent('AuthPage_custom_action');
-      _model.timezoneName = await actions.userTimezone();
-      logFirebaseEvent('AuthPage_backend_call');
-
-      await currentUserReference!.update(createUsersRecordData(
-        userTimezone: _model.timezoneName,
-      ));
-    }();
-
     _model.dispose();
 
     super.dispose();
@@ -486,6 +473,7 @@ class _AuthPageWidgetState extends State<AuthPageWidget> {
                                           SignupPageWidget.routeName);
                                     },
                                     child: Text(
+                                      key: ValueKey('Text_o9jr'),
                                       'Sign Up',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium

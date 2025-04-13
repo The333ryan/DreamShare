@@ -42,10 +42,6 @@ dependencies:
   dropdown_button2: 2.3.9
   easy_debounce: 2.0.1
   equatable: 2.0.5
-  ff_commons:
-    path: ./dependencies/ff_commons # 1.0.0+1
-  ff_theme:
-    path: ./dependencies/ff_theme # 1.0.0+1
   file_picker: 8.1.2
   firebase_analytics: 11.3.5
   firebase_analytics_platform_interface: 4.2.7
@@ -95,8 +91,6 @@ dependencies:
   intl: 0.19.0
   json_path: 0.7.2
   mime_type: 1.0.0
-  neo_p_o_p_button_library_scqa6m:
-    path: ./dependencies/neo_p_o_p_button_library_scqa6m # 1.0.0
   page_transition: 2.1.0
   path_provider: 2.1.4
   path_provider_android: 2.2.10
@@ -120,6 +114,7 @@ dependencies:
   sqflite: 2.3.3+1
   sqflite_common: 2.5.4+3
   stream_transform: 2.1.0
+  substring_highlight: 1.0.33
   timeago: 3.6.1
   url_launcher: 6.3.0
   url_launcher_android: 6.3.10

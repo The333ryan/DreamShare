@@ -9,7 +9,7 @@ import 'auth/firebase_auth/auth_util.dart';
 
 import 'backend/push_notifications/push_notifications_util.dart';
 import 'backend/firebase/firebase_config.dart';
-import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'index.dart';
 
@@ -27,12 +27,8 @@ void main() async {
 
   await initializeFirebaseRemoteConfig();
 
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider(
-        create: (context) => appState,
-      ),
-    ],
+  runApp(ChangeNotifierProvider(
+    create: (context) => appState,
     child: MyApp(),
   ));
 }

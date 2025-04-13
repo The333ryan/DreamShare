@@ -1,9 +1,9 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
-import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'add_dream_model.dart';
@@ -100,6 +100,7 @@ class _AddDreamWidgetState extends State<AddDreamWidget> {
                       Container(
                         width: 350.0,
                         child: TextFormField(
+                          key: ValueKey('TextField_h03y'),
                           controller: _model.textController1,
                           focusNode: _model.textFieldFocusNode1,
                           autofocus: false,
@@ -180,6 +181,7 @@ class _AddDreamWidgetState extends State<AddDreamWidget> {
                           child: Container(
                             width: 350.0,
                             child: TextFormField(
+                              key: ValueKey('TextField_iqmm'),
                               controller: _model.textController2,
                               focusNode: _model.textFieldFocusNode2,
                               autofocus: false,
@@ -297,6 +299,7 @@ class _AddDreamWidgetState extends State<AddDreamWidget> {
               Align(
                 alignment: AlignmentDirectional(0.08, 0.86),
                 child: FFButtonWidget(
+                  key: ValueKey('Button_uozq'),
                   onPressed: () async {
                     logFirebaseEvent('ADD_DREAM_PAGE_POST_DREAM_BTN_ON_TAP');
                     logFirebaseEvent('Button_validate_form');
