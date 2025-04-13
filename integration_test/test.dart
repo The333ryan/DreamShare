@@ -36,7 +36,7 @@ void main() async {
   testWidgets('AI Interpretation', (WidgetTester tester) async {
     _overrideOnError();
     await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: 'mike@uri.edu', password: '21aaaa');
+        email: 'michael.dey@uri.edu', password: '21aaaa');
     await tester.pumpWidget(ChangeNotifierProvider(
       create: (context) => FFAppState(),
       child: MyApp(
