@@ -198,138 +198,151 @@ class _DreamListWidgetState extends State<DreamListWidget>
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 10.0, 0.0, 0.0),
-                            child: StreamBuilder<List<DreamsRecord>>(
-                              stream: queryDreamsRecord(
-                                queryBuilder: (dreamsRecord) =>
-                                    dreamsRecord.where(
-                                  'uid',
-                                  isEqualTo: currentUserUid,
+                            child: AuthUserStreamWidget(
+                              builder: (context) =>
+                                  StreamBuilder<List<DreamsRecord>>(
+                                stream: queryDreamsRecord(
+                                  queryBuilder: (dreamsRecord) =>
+                                      dreamsRecord.whereIn(
+                                          'uid',
+                                          (currentUserDocument?.following
+                                                  .toList() ??
+                                              [])),
                                 ),
-                              ),
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 50.0,
-                                      height: 50.0,
-                                      child: CircularProgressIndicator(
-                                        valueColor:
-                                            AlwaysStoppedAnimation<Color>(
-                                          FlutterFlowTheme.of(context).primary,
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                }
-                                List<DreamsRecord> listViewDreamsRecordList =
-                                    snapshot.data!;
-
-                                return ListView.builder(
-                                  padding: EdgeInsets.zero,
-                                  scrollDirection: Axis.vertical,
-                                  itemCount: listViewDreamsRecordList.length,
-                                  itemBuilder: (context, listViewIndex) {
-                                    final listViewDreamsRecord =
-                                        listViewDreamsRecordList[listViewIndex];
-                                    return Padding(
-                                      padding: EdgeInsets.all(6.0),
-                                      child: StreamBuilder<List<UsersRecord>>(
-                                        stream: queryUsersRecord(
-                                          queryBuilder: (usersRecord) =>
-                                              usersRecord.where(
-                                            'uid',
-                                            isEqualTo: listViewDreamsRecord.uid,
+                                builder: (context, snapshot) {
+                                  // Customize what your widget looks like when it's loading.
+                                  if (!snapshot.hasData) {
+                                    return Center(
+                                      child: SizedBox(
+                                        width: 50.0,
+                                        height: 50.0,
+                                        child: CircularProgressIndicator(
+                                          valueColor:
+                                              AlwaysStoppedAnimation<Color>(
+                                            FlutterFlowTheme.of(context)
+                                                .primary,
                                           ),
-                                          singleRecord: true,
                                         ),
-                                        builder: (context, snapshot) {
-                                          // Customize what your widget looks like when it's loading.
-                                          if (!snapshot.hasData) {
-                                            return Center(
-                                              child: SizedBox(
-                                                width: 50.0,
-                                                height: 50.0,
-                                                child:
-                                                    CircularProgressIndicator(
-                                                  valueColor:
-                                                      AlwaysStoppedAnimation<
-                                                          Color>(
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                  ),
-                                                ),
-                                              ),
-                                            );
-                                          }
-                                          List<UsersRecord>
-                                              dreamUsersRecordList =
-                                              snapshot.data!;
-                                          // Return an empty Container when the item does not exist.
-                                          if (snapshot.data!.isEmpty) {
-                                            return Container();
-                                          }
-                                          final dreamUsersRecord =
-                                              dreamUsersRecordList.isNotEmpty
-                                                  ? dreamUsersRecordList.first
-                                                  : null;
-
-                                          return InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            onTap: () async {
-                                              logFirebaseEvent(
-                                                  'DREAM_LIST_Container_rfa73ojg_ON_TAP');
-                                              logFirebaseEvent(
-                                                  'Dream_navigate_to');
-
-                                              context.pushNamed(
-                                                ViewDreamOtherWidget.routeName,
-                                                queryParameters: {
-                                                  'dreamView': serializeParam(
-                                                    listViewDreamsRecord,
-                                                    ParamType.Document,
-                                                  ),
-                                                  'authorDocReference':
-                                                      serializeParam(
-                                                    dreamUsersRecord?.reference,
-                                                    ParamType.DocumentReference,
-                                                  ),
-                                                  'authorDoc': serializeParam(
-                                                    dreamUsersRecord,
-                                                    ParamType.Document,
-                                                  ),
-                                                }.withoutNulls,
-                                                extra: <String, dynamic>{
-                                                  'dreamView':
-                                                      listViewDreamsRecord,
-                                                  'authorDoc': dreamUsersRecord,
-                                                },
-                                              );
-
-                                              logFirebaseEvent(
-                                                  'Dream_google_analytics_event');
-                                              logFirebaseEvent(
-                                                'Dream_On_Tap',
-                                                parameters: {
-                                                  'User ID': currentUserUid,
-                                                },
-                                              );
-                                            },
-                                            child: DreamWidget(
-                                              key: Key(
-                                                  'Keyrfa_${listViewIndex}_of_${listViewDreamsRecordList.length}'),
-                                              dreamDoc: listViewDreamsRecord,
-                                            ),
-                                          );
-                                        },
                                       ),
                                     );
-                                  },
-                                );
-                              },
+                                  }
+                                  List<DreamsRecord> listViewDreamsRecordList =
+                                      snapshot.data!;
+
+                                  return ListView.builder(
+                                    padding: EdgeInsets.zero,
+                                    scrollDirection: Axis.vertical,
+                                    itemCount: listViewDreamsRecordList.length,
+                                    itemBuilder: (context, listViewIndex) {
+                                      final listViewDreamsRecord =
+                                          listViewDreamsRecordList[
+                                              listViewIndex];
+                                      return Padding(
+                                        padding: EdgeInsets.all(6.0),
+                                        child: StreamBuilder<List<UsersRecord>>(
+                                          stream: queryUsersRecord(
+                                            queryBuilder: (usersRecord) =>
+                                                usersRecord.where(
+                                              'uid',
+                                              isEqualTo:
+                                                  listViewDreamsRecord.uid,
+                                            ),
+                                            singleRecord: true,
+                                          ),
+                                          builder: (context, snapshot) {
+                                            // Customize what your widget looks like when it's loading.
+                                            if (!snapshot.hasData) {
+                                              return Center(
+                                                child: SizedBox(
+                                                  width: 50.0,
+                                                  height: 50.0,
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    valueColor:
+                                                        AlwaysStoppedAnimation<
+                                                            Color>(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primary,
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                            List<UsersRecord>
+                                                dreamUsersRecordList =
+                                                snapshot.data!;
+                                            // Return an empty Container when the item does not exist.
+                                            if (snapshot.data!.isEmpty) {
+                                              return Container();
+                                            }
+                                            final dreamUsersRecord =
+                                                dreamUsersRecordList.isNotEmpty
+                                                    ? dreamUsersRecordList.first
+                                                    : null;
+
+                                            return InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                logFirebaseEvent(
+                                                    'DREAM_LIST_Container_rfa73ojg_ON_TAP');
+                                                logFirebaseEvent(
+                                                    'Dream_navigate_to');
+
+                                                context.pushNamed(
+                                                  ViewDreamOtherWidget
+                                                      .routeName,
+                                                  queryParameters: {
+                                                    'dreamView': serializeParam(
+                                                      listViewDreamsRecord,
+                                                      ParamType.Document,
+                                                    ),
+                                                    'authorDocReference':
+                                                        serializeParam(
+                                                      dreamUsersRecord
+                                                          ?.reference,
+                                                      ParamType
+                                                          .DocumentReference,
+                                                    ),
+                                                    'authorDoc': serializeParam(
+                                                      dreamUsersRecord,
+                                                      ParamType.Document,
+                                                    ),
+                                                  }.withoutNulls,
+                                                  extra: <String, dynamic>{
+                                                    'dreamView':
+                                                        listViewDreamsRecord,
+                                                    'authorDoc':
+                                                        dreamUsersRecord,
+                                                  },
+                                                );
+
+                                                logFirebaseEvent(
+                                                    'Dream_google_analytics_event');
+                                                logFirebaseEvent(
+                                                  'Dream_On_Tap',
+                                                  parameters: {
+                                                    'User ID': currentUserUid,
+                                                  },
+                                                );
+                                              },
+                                              child: DreamWidget(
+                                                key: Key(
+                                                    'Keyrfa_${listViewIndex}_of_${listViewDreamsRecordList.length}'),
+                                                dreamDoc: listViewDreamsRecord,
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
                             ),
                           ),
                           Padding(

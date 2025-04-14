@@ -1,4 +1,4 @@
-package com.mycompany.dreamshare
+package com.uricsc305.dreamshare
 
 import io.flutter.embedding.android.FlutterActivity
 
