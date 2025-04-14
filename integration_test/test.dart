@@ -154,14 +154,39 @@ void main() async {
     await GoogleFonts.pendingFonts();
 
     await tester.tap(find.byKey(const ValueKey('FloatingActionButton_csqu')));
+    await tester.pumpAndSettle(
+      const Duration(milliseconds: 10),
+      EnginePhase.sendSemanticsUpdate,
+      const Duration(milliseconds: 10),
+    );
     await tester.enterText(
         find.byKey(const ValueKey('TextField_h03y')), 'dream title test');
     await tester.enterText(
         find.byKey(const ValueKey('TextField_iqmm')), 'Testing unit test');
     await tester.tap(find.byKey(const ValueKey('Button_uozq')));
+    await tester.pumpAndSettle(
+      const Duration(milliseconds: 10),
+      EnginePhase.sendSemanticsUpdate,
+      const Duration(milliseconds: 10),
+    );
     await tester.tap(find.byIcon(Icons.person));
+    await tester.pumpAndSettle(
+      const Duration(milliseconds: 10),
+      EnginePhase.sendSemanticsUpdate,
+      const Duration(milliseconds: 10),
+    );
     await tester.tap(find.byKey(const ValueKey('IconButton_eqf7')));
+    await tester.pumpAndSettle(
+      const Duration(milliseconds: 10),
+      EnginePhase.sendSemanticsUpdate,
+      const Duration(milliseconds: 10),
+    );
     await tester.tap(find.byKey(const ValueKey('Button_kd1j')));
+    await tester.pumpAndSettle(
+      const Duration(milliseconds: 10),
+      EnginePhase.sendSemanticsUpdate,
+      const Duration(milliseconds: 10),
+    );
   });
 
   testWidgets('Bad Email Format', (WidgetTester tester) async {
