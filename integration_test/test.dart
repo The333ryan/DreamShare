@@ -160,8 +160,6 @@ void main() async {
         find.byKey(const ValueKey('TextField_iqmm')), 'Testing unit test');
     await tester.tap(find.byKey(const ValueKey('Button_uozq')));
     await tester.tap(find.byIcon(Icons.person));
-    await tester.pump(kDoubleTapMinTime);
-    await tester.tap(find.byIcon(Icons.person));
     await tester.tap(find.byKey(const ValueKey('IconButton_eqf7')));
     await tester.tap(find.byKey(const ValueKey('Button_kd1j')));
   });
