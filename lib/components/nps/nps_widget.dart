@@ -77,9 +77,17 @@ class _NpsWidgetState extends State<NpsWidget> {
               'How likely are you to recommend the app to others?',
               textAlign: TextAlign.center,
               style: FlutterFlowTheme.of(context).headlineSmall.override(
-                    fontFamily: 'Exo 2',
+                    font: GoogleFonts.exo2(
+                      fontWeight:
+                          FlutterFlowTheme.of(context).headlineSmall.fontWeight,
+                      fontStyle:
+                          FlutterFlowTheme.of(context).headlineSmall.fontStyle,
+                    ),
                     letterSpacing: 0.0,
-                    useGoogleFonts: GoogleFonts.asMap().containsKey('Exo 2'),
+                    fontWeight:
+                        FlutterFlowTheme.of(context).headlineSmall.fontWeight,
+                    fontStyle:
+                        FlutterFlowTheme.of(context).headlineSmall.fontStyle,
                   ),
             ),
             RatingBar.builder(
@@ -109,10 +117,18 @@ class _NpsWidgetState extends State<NpsWidget> {
                 iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                 color: FlutterFlowTheme.of(context).primary,
                 textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                      fontFamily: 'Exo 2',
+                      font: GoogleFonts.exo2(
+                        fontWeight:
+                            FlutterFlowTheme.of(context).titleSmall.fontWeight,
+                        fontStyle:
+                            FlutterFlowTheme.of(context).titleSmall.fontStyle,
+                      ),
                       color: Colors.white,
                       letterSpacing: 0.0,
-                      useGoogleFonts: GoogleFonts.asMap().containsKey('Exo 2'),
+                      fontWeight:
+                          FlutterFlowTheme.of(context).titleSmall.fontWeight,
+                      fontStyle:
+                          FlutterFlowTheme.of(context).titleSmall.fontStyle,
                     ),
                 elevation: 0.0,
                 borderRadius: BorderRadius.circular(8.0),

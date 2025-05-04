@@ -1,10 +1,12 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'add_dream_model.dart';
 export 'add_dream_model.dart';
@@ -19,10 +21,13 @@ class AddDreamWidget extends StatefulWidget {
   State<AddDreamWidget> createState() => _AddDreamWidgetState();
 }
 
-class _AddDreamWidgetState extends State<AddDreamWidget> {
+class _AddDreamWidgetState extends State<AddDreamWidget>
+    with TickerProviderStateMixin {
   late AddDreamModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
@@ -35,6 +40,28 @@ class _AddDreamWidgetState extends State<AddDreamWidget> {
 
     _model.textController2 ??= TextEditingController();
     _model.textFieldFocusNode2 ??= FocusNode();
+
+    animationsMap.addAll({
+      'containerOnActionTriggerAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onActionTrigger,
+        applyInitialState: true,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: Offset(0.0, 0.0),
+            end: Offset(115.0, 0.0),
+          ),
+        ],
+      ),
+    });
+    setupAnimations(
+      animationsMap.values.where((anim) =>
+          anim.trigger == AnimationTrigger.onActionTrigger ||
+          !anim.applyInitialState),
+      this,
+    );
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -59,129 +86,180 @@ class _AddDreamWidgetState extends State<AddDreamWidget> {
           getRemoteConfigString('lightmode_background'),
           defaultColor: Color(0xFFC155FF),
         ),
-        body: SafeArea(
-          top: true,
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              image: Image.asset(
+                Theme.of(context).brightness == Brightness.dark
+                    ? 'assets/images/DreamshareNightBack.jpg'
+                    : 'assets/images/DreamshareDayBack.jpg',
+              ).image,
+            ),
+          ),
           child: Stack(
             children: [
-              Align(
-                alignment: AlignmentDirectional(0.0, -1.0),
-                child: Container(
-                  width: 227.2,
-                  height: 54.6,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
-                    borderRadius: BorderRadius.circular(24.0),
-                    shape: BoxShape.rectangle,
-                  ),
-                  child: Align(
+              Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Align(
                     alignment: AlignmentDirectional(0.0, 0.0),
-                    child: Text(
-                      'Add Dream',
-                      textAlign: TextAlign.center,
-                      style: FlutterFlowTheme.of(context).displaySmall.override(
-                            fontFamily: 'Exo 2',
-                            letterSpacing: 0.0,
-                            useGoogleFonts:
-                                GoogleFonts.asMap().containsKey('Exo 2'),
-                          ),
-                    ),
-                  ),
-                ),
-              ),
-              Align(
-                alignment: AlignmentDirectional(0.0, -0.75),
-                child: Form(
-                  key: _model.formKey,
-                  autovalidateMode: AutovalidateMode.disabled,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Container(
-                        width: 350.0,
-                        child: TextFormField(
-                          key: ValueKey('TextField_h03y'),
-                          controller: _model.textController1,
-                          focusNode: _model.textFieldFocusNode1,
-                          autofocus: false,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            isDense: true,
-                            labelStyle: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .labelMediumFamily,
-                                  letterSpacing: 0.0,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .labelMediumFamily),
+                    child: Container(
+                      width: 227.2,
+                      height: 54.6,
+                      decoration: BoxDecoration(
+                        color: valueOrDefault<Color>(
+                          Theme.of(context).brightness == Brightness.dark
+                              ? colorFromCssString(
+                                  getRemoteConfigString('button_color_night'),
+                                  defaultColor: Color(0xFF4900FF),
+                                )
+                              : colorFromCssString(
+                                  getRemoteConfigString('button_color_day'),
+                                  defaultColor: Color(0xFFAACCFF),
                                 ),
-                            hintText: 'Dream Title...',
-                            hintStyle: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .labelMediumFamily,
-                                  letterSpacing: 0.0,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .labelMediumFamily),
-                                ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0x00000000),
-                                width: 1.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0x00000000),
-                                width: 1.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 1.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 1.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            filled: true,
-                            fillColor: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                          ),
+                          Color(0xFF4900FF),
+                        ),
+                        borderRadius: BorderRadius.circular(24.0),
+                        shape: BoxShape.rectangle,
+                      ),
+                      child: Align(
+                        alignment: AlignmentDirectional(0.0, 0.0),
+                        child: Text(
+                          'Add Dream',
+                          textAlign: TextAlign.center,
                           style: FlutterFlowTheme.of(context)
-                              .bodyMedium
+                              .displaySmall
                               .override(
-                                fontFamily: 'Exo 2',
+                                font: GoogleFonts.exo2(
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .displaySmall
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .displaySmall
+                                      .fontStyle,
+                                ),
+                                color: valueOrDefault<Color>(
+                                  Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? colorFromCssString(
+                                          getRemoteConfigString('text_night'),
+                                          defaultColor: Color(0xFFAACCFF),
+                                        )
+                                      : colorFromCssString(
+                                          getRemoteConfigString('text_day'),
+                                          defaultColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondary,
+                                        ),
+                                  Color(0xFFAACCFF),
+                                ),
                                 letterSpacing: 0.0,
-                                useGoogleFonts:
-                                    GoogleFonts.asMap().containsKey('Exo 2'),
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .displaySmall
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .displaySmall
+                                    .fontStyle,
                               ),
-                          cursorColor: FlutterFlowTheme.of(context).primaryText,
-                          validator: _model.textController1Validator
-                              .asValidator(context),
                         ),
                       ),
-                      Align(
-                        alignment: AlignmentDirectional(0.0, 0.0),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 100.0),
+                    ),
+                  ),
+                  Form(
+                    key: _model.formKey,
+                    autovalidateMode: AutovalidateMode.disabled,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Container(
+                          width: 350.0,
+                          child: TextFormField(
+                            controller: _model.textController1,
+                            focusNode: _model.textFieldFocusNode1,
+                            autofocus: false,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              isDense: true,
+                              labelStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    font: FlutterFlowTheme.of(context)
+                                        .labelMedium,
+                                    letterSpacing: 0.0,
+                                  ),
+                              hintText: 'Dream Title...',
+                              hintStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    font: FlutterFlowTheme.of(context)
+                                        .labelMedium,
+                                    letterSpacing: 0.0,
+                                  ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              filled: true,
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  font: GoogleFonts.exo2(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontStyle,
+                                ),
+                            cursorColor:
+                                FlutterFlowTheme.of(context).primaryText,
+                            validator: _model.textController1Validator
+                                .asValidator(context),
+                          ),
+                        ),
+                        Align(
+                          alignment: AlignmentDirectional(0.0, 0.0),
                           child: Container(
                             width: 350.0,
                             child: TextFormField(
-                              key: ValueKey('TextField_iqmm'),
                               controller: _model.textController2,
                               focusNode: _model.textFieldFocusNode2,
                               autofocus: false,
@@ -191,25 +269,17 @@ class _AddDreamWidgetState extends State<AddDreamWidget> {
                                 labelStyle: FlutterFlowTheme.of(context)
                                     .labelMedium
                                     .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .labelMediumFamily,
+                                      font: FlutterFlowTheme.of(context)
+                                          .labelMedium,
                                       letterSpacing: 0.0,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMediumFamily),
                                     ),
                                 hintText: 'Dream Description...',
                                 hintStyle: FlutterFlowTheme.of(context)
                                     .labelMedium
                                     .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .labelMediumFamily,
+                                      font: FlutterFlowTheme.of(context)
+                                          .labelMedium,
                                       letterSpacing: 0.0,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMediumFamily),
                                     ),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -246,14 +316,20 @@ class _AddDreamWidgetState extends State<AddDreamWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: 'Exo 2',
+                                    font: GoogleFonts.exo2(
+                                      fontWeight: FontWeight.w500,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w500,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey('Exo 2'),
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
                                   ),
                               maxLines: null,
-                              minLines: 25,
+                              minLines: 20,
                               cursorColor:
                                   FlutterFlowTheme.of(context).primaryText,
                               validator: _model.textController2Validator
@@ -261,109 +337,367 @@ class _AddDreamWidgetState extends State<AddDreamWidget> {
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Align(
-                alignment: AlignmentDirectional(0.09, 1.01),
-                child: FFButtonWidget(
-                  onPressed: () async {
-                    logFirebaseEvent('ADD_DREAM_PAGE_BACK_BTN_ON_TAP');
-                    logFirebaseEvent('Button_navigate_back');
-                    context.safePop();
-                  },
-                  text: 'Back',
-                  options: FFButtonOptions(
-                    width: 200.0,
-                    height: 40.0,
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                    iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: FlutterFlowTheme.of(context).secondary,
-                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).titleSmallFamily,
-                          color: Colors.white,
-                          letterSpacing: 0.0,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).titleSmallFamily),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      logFirebaseEvent(
+                                          'ADD_DREAM_PAGE_Container_ifbz3aa9_ON_TAP');
+                                      logFirebaseEvent(
+                                          'Container_update_page_state');
+                                      _model.selectedPrivacy = true;
+                                      safeSetState(() {});
+                                    },
+                                    child: Container(
+                                      width: 100.0,
+                                      height: 50.0,
+                                      decoration: BoxDecoration(
+                                        color: Theme.of(context).brightness ==
+                                                Brightness.light
+                                            ? Colors.white
+                                            : Color(0xFFF1F4F8),
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                        border: Border.all(
+                                          color: valueOrDefault<Color>(
+                                            Theme.of(context).brightness ==
+                                                    Brightness.light
+                                                ? Color(0xFFE0E3E7)
+                                                : Color(0xFFF1F4F8),
+                                            Color(0xFFE0E3E7),
+                                          ),
+                                          width: 1.0,
+                                        ),
+                                      ),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.people,
+                                            color:
+                                                Theme.of(context).brightness ==
+                                                        Brightness.light
+                                                    ? Color(0xFF14181B)
+                                                    : Color(0xFF57636C),
+                                            size: 16.0,
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    4.0, 0.0, 0.0, 0.0),
+                                            child: Text(
+                                              'Public',
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    font: GoogleFonts.outfit(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontStyle,
+                                                    ),
+                                                    color: Theme.of(context)
+                                                                .brightness ==
+                                                            Brightness.light
+                                                        ? Color(0xFF14181B)
+                                                        : Color(0xFF57636C),
+                                                    fontSize: 14.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontStyle,
+                                                  ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        logFirebaseEvent(
+                                            'ADD_DREAM_PAGE_Container_r1cyedll_ON_TAP');
+                                        logFirebaseEvent(
+                                            'Container_update_page_state');
+                                        _model.selectedPrivacy = false;
+                                        safeSetState(() {});
+                                      },
+                                      child: Container(
+                                        width: 100.0,
+                                        height: 50.0,
+                                        decoration: BoxDecoration(
+                                          color: Theme.of(context).brightness ==
+                                                  Brightness.dark
+                                              ? Colors.white
+                                              : Color(0xFFF1F4F8),
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                          border: Border.all(
+                                            color: valueOrDefault<Color>(
+                                              Theme.of(context).brightness ==
+                                                      Brightness.dark
+                                                  ? Color(0xFFE0E3E7)
+                                                  : Color(0xFFF1F4F8),
+                                              Color(0xFFF1F4F8),
+                                            ),
+                                            width: 1.0,
+                                          ),
+                                        ),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Icon(
+                                              Icons.person,
+                                              color: Theme.of(context)
+                                                          .brightness ==
+                                                      Brightness.dark
+                                                  ? Color(0xFF14181B)
+                                                  : Color(0xFF57636C),
+                                              size: 16.0,
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(4.0, 0.0, 0.0, 0.0),
+                                              child: Text(
+                                                'Private',
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyMedium
+                                                    .override(
+                                                      font: GoogleFonts.outfit(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
+                                                      ),
+                                                      color: Theme.of(context)
+                                                                  .brightness ==
+                                                              Brightness.dark
+                                                          ? Color(0xFF14181B)
+                                                          : Color(0xFF57636C),
+                                                      fontSize: 14.0,
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontStyle,
+                                                    ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ).animateOnActionTrigger(
+                                      animationsMap[
+                                          'containerOnActionTriggerAnimation']!,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
-                    elevation: 0.0,
-                    borderRadius: BorderRadius.circular(24.0),
+                      ].divide(SizedBox(height: 30.0)),
+                    ),
                   ),
-                ),
-              ),
-              Align(
-                alignment: AlignmentDirectional(0.08, 0.86),
-                child: FFButtonWidget(
-                  key: ValueKey('Button_uozq'),
-                  onPressed: () async {
-                    logFirebaseEvent('ADD_DREAM_PAGE_POST_DREAM_BTN_ON_TAP');
-                    logFirebaseEvent('Button_validate_form');
-                    if (_model.formKey.currentState == null ||
-                        !_model.formKey.currentState!.validate()) {
-                      return;
-                    }
-                    logFirebaseEvent('Button_backend_call');
+                  Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      FFButtonWidget(
+                        onPressed: () async {
+                          logFirebaseEvent(
+                              'ADD_DREAM_PAGE_POST_DREAM_BTN_ON_TAP');
+                          logFirebaseEvent('Button_validate_form');
+                          if (_model.formKey.currentState == null ||
+                              !_model.formKey.currentState!.validate()) {
+                            return;
+                          }
+                          logFirebaseEvent('Button_backend_call');
 
-                    await DreamsRecord.collection.doc().set({
-                      ...createDreamsRecordData(
-                        dreamTitle: _model.textController1.text,
-                        dreamDescription: _model.textController2.text,
-                        uid: currentUserUid,
-                        photoUrl: currentUserPhoto,
-                        displayName: currentUserDisplayName,
-                      ),
-                      ...mapToFirestore(
-                        {
-                          'date': FieldValue.serverTimestamp(),
+                          await DreamsRecord.collection.doc().set({
+                            ...createDreamsRecordData(
+                              dreamTitle: _model.textController1.text,
+                              dreamDescription: _model.textController2.text,
+                              uid: currentUserUid,
+                              photoUrl: currentUserPhoto,
+                              displayName: currentUserDisplayName,
+                              isPublic: _model.selectedPrivacy,
+                            ),
+                            ...mapToFirestore(
+                              {
+                                'date': FieldValue.serverTimestamp(),
+                              },
+                            ),
+                          });
+                          logFirebaseEvent('Button_google_analytics_event');
+                          logFirebaseEvent(
+                            'Finish_Dream_On_Tap',
+                            parameters: {
+                              'User ID': currentUserUid,
+                            },
+                          );
+                          logFirebaseEvent('Button_navigate_to');
+
+                          context.pushNamed(DreamListWidget.routeName);
+
+                          logFirebaseEvent('Button_backend_call');
+
+                          await currentUserReference!.update({
+                            ...mapToFirestore(
+                              {
+                                'numDreams': FieldValue.increment(1),
+                              },
+                            ),
+                          });
                         },
-                      ),
-                    });
-                    logFirebaseEvent('Button_google_analytics_event');
-                    logFirebaseEvent(
-                      'Finish_Dream_On_Tap',
-                      parameters: {
-                        'User ID': currentUserUid,
-                      },
-                    );
-                    logFirebaseEvent('Button_navigate_to');
-
-                    context.pushNamed(DreamListWidget.routeName);
-
-                    logFirebaseEvent('Button_backend_call');
-
-                    await currentUserReference!.update({
-                      ...mapToFirestore(
-                        {
-                          'numDreams': FieldValue.increment(1),
-                        },
-                      ),
-                    });
-                  },
-                  text: 'Post Dream',
-                  options: FFButtonOptions(
-                    width: 200.0,
-                    height: 40.0,
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                    iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: FlutterFlowTheme.of(context).secondary,
-                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                          fontFamily: 'Exo 2',
-                          color: Colors.white,
-                          letterSpacing: 0.0,
-                          useGoogleFonts:
-                              GoogleFonts.asMap().containsKey('Exo 2'),
+                        text: 'Post Dream',
+                        options: FFButtonOptions(
+                          width: 150.0,
+                          height: 40.0,
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          color: valueOrDefault<Color>(
+                            Theme.of(context).brightness == Brightness.dark
+                                ? colorFromCssString(
+                                    getRemoteConfigString('button_color_night'),
+                                    defaultColor: Color(0xFF4900FF),
+                                  )
+                                : colorFromCssString(
+                                    getRemoteConfigString('button_color_day'),
+                                    defaultColor: Color(0xFFAACCFF),
+                                  ),
+                            Color(0xFF4900FF),
+                          ),
+                          textStyle: FlutterFlowTheme.of(context)
+                              .titleSmall
+                              .override(
+                                font: GoogleFonts.exo2(
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .fontStyle,
+                                ),
+                                color: valueOrDefault<Color>(
+                                  Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? colorFromCssString(
+                                          getRemoteConfigString('text_night'),
+                                          defaultColor: Color(0xFFAACCFF),
+                                        )
+                                      : colorFromCssString(
+                                          getRemoteConfigString('text_day'),
+                                          defaultColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondary,
+                                        ),
+                                  Color(0xFFAACCFF),
+                                ),
+                                fontSize: 20.0,
+                                letterSpacing: 0.0,
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .fontStyle,
+                              ),
+                          elevation: 0.0,
+                          borderRadius: BorderRadius.circular(24.0),
                         ),
-                    elevation: 0.0,
-                    borderRadius: BorderRadius.circular(24.0),
+                      ),
+                      FFButtonWidget(
+                        onPressed: () async {
+                          logFirebaseEvent('ADD_DREAM_PAGE_DISCARD_BTN_ON_TAP');
+                          logFirebaseEvent('Button_navigate_back');
+                          context.safePop();
+                        },
+                        text: 'Discard',
+                        options: FFButtonOptions(
+                          width: 100.0,
+                          height: 40.0,
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              16.0, 0.0, 16.0, 0.0),
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          color: valueOrDefault<Color>(
+                            Theme.of(context).brightness == Brightness.dark
+                                ? colorFromCssString(
+                                    getRemoteConfigString('button_color_night'),
+                                    defaultColor: Color(0xFF4900FF),
+                                  )
+                                : colorFromCssString(
+                                    getRemoteConfigString('button_color_day'),
+                                    defaultColor: Color(0xFFAACCFF),
+                                  ),
+                            Color(0xFF4900FF),
+                          ),
+                          textStyle: FlutterFlowTheme.of(context)
+                              .titleSmall
+                              .override(
+                                font: FlutterFlowTheme.of(context).titleSmall,
+                                color: valueOrDefault<Color>(
+                                  Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? colorFromCssString(
+                                          getRemoteConfigString('text_night'),
+                                          defaultColor: Color(0xFFAACCFF),
+                                        )
+                                      : colorFromCssString(
+                                          getRemoteConfigString('text_day'),
+                                          defaultColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondary,
+                                        ),
+                                  Color(0xFFAACCFF),
+                                ),
+                                fontSize: 14.0,
+                                letterSpacing: 0.0,
+                              ),
+                          elevation: 0.0,
+                          borderRadius: BorderRadius.circular(24.0),
+                        ),
+                      ),
+                    ].divide(SizedBox(height: 10.0)),
                   ),
-                ),
+                ].divide(SizedBox(height: 50.0)),
               ),
             ],
           ),

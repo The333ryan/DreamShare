@@ -3,9 +3,10 @@ import '/components/user_search_popup/user_search_popup_widget.dart';
 import '/flutter_flow/flutter_flow_autocomplete_options_list.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:text_search/text_search.dart';
 import 'search_user_model.dart';
 export 'search_user_model.dart';
 
@@ -74,11 +75,8 @@ class _SearchUserWidgetState extends State<SearchUserWidget> {
               Text(
                 'Find Users',
                 style: FlutterFlowTheme.of(context).headlineMedium.override(
-                      fontFamily:
-                          FlutterFlowTheme.of(context).headlineMediumFamily,
+                      font: FlutterFlowTheme.of(context).headlineMedium,
                       letterSpacing: 0.0,
-                      useGoogleFonts: GoogleFonts.asMap().containsKey(
-                          FlutterFlowTheme.of(context).headlineMediumFamily),
                     ),
               ),
               Container(
@@ -128,13 +126,9 @@ class _SearchUserWidgetState extends State<SearchUserWidget> {
                               textStyle: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily,
+                                    font:
+                                        FlutterFlowTheme.of(context).bodyMedium,
                                     letterSpacing: 0.0,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .bodyMediumFamily),
                                   ),
                               textHighlightStyle: TextStyle(),
                               elevation: 4.0,
@@ -165,6 +159,37 @@ class _SearchUserWidgetState extends State<SearchUserWidget> {
                               controller: textEditingController,
                               focusNode: focusNode,
                               onEditingComplete: onEditingComplete,
+                              onChanged: (_) => EasyDebounce.debounce(
+                                '_model.textController',
+                                Duration(milliseconds: 2000),
+                                () => safeSetState(() {}),
+                              ),
+                              onFieldSubmitted: (_) async {
+                                logFirebaseEvent(
+                                    'SEARCH_USER_TextField_hsvfv4hf_ON_TEXTFI');
+                                logFirebaseEvent('TextField_simple_search');
+                                await queryUsersRecordOnce()
+                                    .then(
+                                      (records) => _model
+                                          .simpleSearchResults = TextSearch(
+                                        records
+                                            .map(
+                                              (record) =>
+                                                  TextSearchItem.fromTerms(
+                                                      record,
+                                                      [record.displayName]),
+                                            )
+                                            .toList(),
+                                      )
+                                          .search(_model.textController.text)
+                                          .map((r) => r.object)
+                                          .take(4)
+                                          .toList(),
+                                    )
+                                    .onError((_, __) =>
+                                        _model.simpleSearchResults = [])
+                                    .whenComplete(() => safeSetState(() {}));
+                              },
                               autofocus: false,
                               textInputAction: TextInputAction.search,
                               obscureText: false,
@@ -173,13 +198,9 @@ class _SearchUserWidgetState extends State<SearchUserWidget> {
                                 hintStyle: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyMediumFamily,
+                                      font: FlutterFlowTheme.of(context)
+                                          .bodyMedium,
                                       letterSpacing: 0.0,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMediumFamily),
                                     ),
                                 enabledBorder: InputBorder.none,
                                 focusedBorder: InputBorder.none,
@@ -191,13 +212,9 @@ class _SearchUserWidgetState extends State<SearchUserWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily,
+                                    font:
+                                        FlutterFlowTheme.of(context).bodyMedium,
                                     letterSpacing: 0.0,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .bodyMediumFamily),
                                   ),
                               textAlign: TextAlign.start,
                               minLines: 1,
@@ -215,7 +232,7 @@ class _SearchUserWidgetState extends State<SearchUserWidget> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    if (!FFAppState().searchActive)
+                    if (FFAppState().searchActive)
                       Flexible(
                         child: StreamBuilder<List<UsersRecord>>(
                           stream: queryUsersRecord(

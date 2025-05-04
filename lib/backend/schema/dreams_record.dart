@@ -50,6 +50,11 @@ class DreamsRecord extends FirestoreRecord {
   DocumentReference? get comments => _comments;
   bool hasComments() => _comments != null;
 
+  // "isPublic" field.
+  bool? _isPublic;
+  bool get isPublic => _isPublic ?? false;
+  bool hasIsPublic() => _isPublic != null;
+
   void _initializeFields() {
     _dreamTitle = snapshotData['dreamTitle'] as String?;
     _dreamDescription = snapshotData['dreamDescription'] as String?;
@@ -58,6 +63,7 @@ class DreamsRecord extends FirestoreRecord {
     _photoUrl = snapshotData['photo_url'] as String?;
     _displayName = snapshotData['display_name'] as String?;
     _comments = snapshotData['comments'] as DocumentReference?;
+    _isPublic = snapshotData['isPublic'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -101,6 +107,7 @@ Map<String, dynamic> createDreamsRecordData({
   String? photoUrl,
   String? displayName,
   DocumentReference? comments,
+  bool? isPublic,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -111,6 +118,7 @@ Map<String, dynamic> createDreamsRecordData({
       'photo_url': photoUrl,
       'display_name': displayName,
       'comments': comments,
+      'isPublic': isPublic,
     }.withoutNulls,
   );
 
@@ -128,7 +136,8 @@ class DreamsRecordDocumentEquality implements Equality<DreamsRecord> {
         e1?.date == e2?.date &&
         e1?.photoUrl == e2?.photoUrl &&
         e1?.displayName == e2?.displayName &&
-        e1?.comments == e2?.comments;
+        e1?.comments == e2?.comments &&
+        e1?.isPublic == e2?.isPublic;
   }
 
   @override
@@ -139,7 +148,8 @@ class DreamsRecordDocumentEquality implements Equality<DreamsRecord> {
         e?.date,
         e?.photoUrl,
         e?.displayName,
-        e?.comments
+        e?.comments,
+        e?.isPublic
       ]);
 
   @override

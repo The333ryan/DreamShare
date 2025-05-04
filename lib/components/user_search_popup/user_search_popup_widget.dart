@@ -2,7 +2,6 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'user_search_popup_model.dart';
 export 'user_search_popup_model.dart';
 
@@ -84,23 +83,17 @@ class _UserSearchPopupWidgetState extends State<UserSearchPopupWidget> {
                     builder: (context) => Text(
                       currentUserDisplayName,
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).bodyMediumFamily,
+                            font: FlutterFlowTheme.of(context).bodyMedium,
                             letterSpacing: 0.0,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).bodyMediumFamily),
                           ),
                     ),
                   ),
                   Text(
                     currentUserEmail,
                     style: FlutterFlowTheme.of(context).labelSmall.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).labelSmallFamily,
+                          font: FlutterFlowTheme.of(context).labelSmall,
                           color: FlutterFlowTheme.of(context).secondaryText,
                           letterSpacing: 0.0,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).labelSmallFamily),
                         ),
                   ),
                 ],

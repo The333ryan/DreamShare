@@ -1,4 +1,3 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -51,7 +50,18 @@ class _DreamWidgetState extends State<DreamWidget> {
         width: double.infinity,
         height: 103.6,
         decoration: BoxDecoration(
-          color: FlutterFlowTheme.of(context).secondaryBackground,
+          color: valueOrDefault<Color>(
+            Theme.of(context).brightness == Brightness.dark
+                ? colorFromCssString(
+                    getRemoteConfigString('darkmode_background'),
+                    defaultColor: FlutterFlowTheme.of(context).secondary,
+                  )
+                : colorFromCssString(
+                    getRemoteConfigString('button_color_day'),
+                    defaultColor: Color(0xFFAACCFF),
+                  ),
+            FlutterFlowTheme.of(context).secondary,
+          ),
           borderRadius: BorderRadius.circular(24.0),
           shape: BoxShape.rectangle,
         ),
@@ -69,15 +79,13 @@ class _DreamWidgetState extends State<DreamWidget> {
                 children: [
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(8.0, 5.0, 0.0, 0.0),
-                    child: AuthUserStreamWidget(
-                      builder: (context) => ClipRRect(
-                        borderRadius: BorderRadius.circular(24.0),
-                        child: Image.network(
-                          currentUserPhoto,
-                          width: 35.0,
-                          height: 35.0,
-                          fit: BoxFit.cover,
-                        ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(24.0),
+                      child: Image.network(
+                        widget.dreamDoc!.photoUrl,
+                        width: 35.0,
+                        height: 35.0,
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
@@ -98,10 +106,36 @@ class _DreamWidgetState extends State<DreamWidget> {
                             style: FlutterFlowTheme.of(context)
                                 .titleMedium
                                 .override(
-                                  fontFamily: 'Exo 2',
+                                  font: GoogleFonts.exo2(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .titleMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .titleMedium
+                                        .fontStyle,
+                                  ),
+                                  color: valueOrDefault<Color>(
+                                    Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? colorFromCssString(
+                                            getRemoteConfigString('text_night'),
+                                            defaultColor: Color(0xFFAACCFF),
+                                          )
+                                        : colorFromCssString(
+                                            getRemoteConfigString('text_day'),
+                                            defaultColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondary,
+                                          ),
+                                    Color(0xFFAACCFF),
+                                  ),
                                   letterSpacing: 0.0,
-                                  useGoogleFonts:
-                                      GoogleFonts.asMap().containsKey('Exo 2'),
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .titleMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .titleMedium
+                                      .fontStyle,
                                 ),
                           ),
                         ),
@@ -113,10 +147,36 @@ class _DreamWidgetState extends State<DreamWidget> {
                           style: FlutterFlowTheme.of(context)
                               .bodyMedium
                               .override(
-                                fontFamily: 'Exo 2',
+                                font: GoogleFonts.exo2(
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontStyle,
+                                ),
+                                color: valueOrDefault<Color>(
+                                  Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? colorFromCssString(
+                                          getRemoteConfigString('text_night'),
+                                          defaultColor: Color(0xFFAACCFF),
+                                        )
+                                      : colorFromCssString(
+                                          getRemoteConfigString('text_day'),
+                                          defaultColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondary,
+                                        ),
+                                  Color(0xFFAACCFF),
+                                ),
                                 letterSpacing: 0.0,
-                                useGoogleFonts:
-                                    GoogleFonts.asMap().containsKey('Exo 2'),
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontStyle,
                               ),
                         ),
                       ],
@@ -134,12 +194,32 @@ class _DreamWidgetState extends State<DreamWidget> {
                   textAlign: TextAlign.start,
                   maxLines: 2,
                   style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Exo 2',
-                        color: Colors.black,
+                        font: GoogleFonts.exo2(
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .bodyMedium
+                              .fontWeight,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                        ),
+                        color: valueOrDefault<Color>(
+                          Theme.of(context).brightness == Brightness.dark
+                              ? colorFromCssString(
+                                  getRemoteConfigString('text_night'),
+                                  defaultColor: Color(0xFFAACCFF),
+                                )
+                              : colorFromCssString(
+                                  getRemoteConfigString('text_day'),
+                                  defaultColor:
+                                      FlutterFlowTheme.of(context).secondary,
+                                ),
+                          Color(0xFFAACCFF),
+                        ),
                         fontSize: 16.0,
                         letterSpacing: 0.0,
-                        useGoogleFonts:
-                            GoogleFonts.asMap().containsKey('Exo 2'),
+                        fontWeight:
+                            FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                        fontStyle:
+                            FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                       ),
                 ),
               ),

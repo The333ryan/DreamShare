@@ -47,7 +47,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="dreamshare" android:host="dreamshare.com" />
+                <data android:scheme="dreamsharedevelopmentation" android:host="dreamsharedevelopmentation.com" />
             </intent-filter>
 
         </activity>
@@ -58,6 +58,9 @@
             android:name="flutterEmbedding"
             android:value="2" />
 
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-8275745562074405~1892485378"/>
 
 
     </application>

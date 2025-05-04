@@ -52,105 +52,138 @@ class _TipsWidgetState extends State<TipsWidget> {
           getRemoteConfigString('lightmode_background'),
           defaultColor: FlutterFlowTheme.of(context).primary,
         ),
-        body: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Align(
-                alignment: AlignmentDirectional(0.0, -1.0),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 15.0),
-                  child: Text(
-                    'Tips',
-                    textAlign: TextAlign.center,
-                    style: FlutterFlowTheme.of(context).displayLarge.override(
-                          fontFamily: 'Exo 2',
-                          color: colorFromCssString(
-                            getRemoteConfigString('darkmode_background'),
-                            defaultColor:
-                                FlutterFlowTheme.of(context).secondary,
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              image: Image.asset(
+                Theme.of(context).brightness == Brightness.dark
+                    ? 'assets/images/DreamshareNightBack.jpg'
+                    : 'assets/images/DreamshareDayBack.jpg',
+              ).image,
+            ),
+          ),
+          child: Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Align(
+                  alignment: AlignmentDirectional(0.0, -1.0),
+                  child: Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 15.0),
+                    child: Text(
+                      'Tips',
+                      textAlign: TextAlign.center,
+                      style: FlutterFlowTheme.of(context).displayLarge.override(
+                            font: GoogleFonts.exo2(
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .displayLarge
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .displayLarge
+                                  .fontStyle,
+                            ),
+                            color: valueOrDefault<Color>(
+                              Theme.of(context).brightness == Brightness.dark
+                                  ? colorFromCssString(
+                                      getRemoteConfigString('text_night'),
+                                      defaultColor: Color(0xFFAACCFF),
+                                    )
+                                  : colorFromCssString(
+                                      getRemoteConfigString('text_day'),
+                                      defaultColor: FlutterFlowTheme.of(context)
+                                          .secondary,
+                                    ),
+                              Color(0xFFAACCFF),
+                            ),
+                            letterSpacing: 0.0,
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .displayLarge
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .displayLarge
+                                .fontStyle,
                           ),
-                          letterSpacing: 0.0,
-                          useGoogleFonts:
-                              GoogleFonts.asMap().containsKey('Exo 2'),
-                        ),
+                    ),
                   ),
                 ),
-              ),
-              StreamBuilder<List<TipsRecord>>(
-                stream: queryTipsRecord(),
-                builder: (context, snapshot) {
-                  // Customize what your widget looks like when it's loading.
-                  if (!snapshot.hasData) {
-                    return Center(
-                      child: SizedBox(
-                        width: 50.0,
-                        height: 50.0,
-                        child: CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            FlutterFlowTheme.of(context).primary,
+                StreamBuilder<List<TipsRecord>>(
+                  stream: queryTipsRecord(),
+                  builder: (context, snapshot) {
+                    // Customize what your widget looks like when it's loading.
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: SizedBox(
+                          width: 50.0,
+                          height: 50.0,
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              FlutterFlowTheme.of(context).primary,
+                            ),
                           ),
-                        ),
-                      ),
-                    );
-                  }
-                  List<TipsRecord> listViewTipsRecordList = snapshot.data!;
-
-                  return ListView.separated(
-                    padding: EdgeInsets.zero,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
-                    itemCount: listViewTipsRecordList.length,
-                    separatorBuilder: (_, __) => SizedBox(height: 10.0),
-                    itemBuilder: (context, listViewIndex) {
-                      final listViewTipsRecord =
-                          listViewTipsRecordList[listViewIndex];
-                      return Padding(
-                        padding: EdgeInsets.all(6.0),
-                        child: StreamBuilder<List<TipsRecord>>(
-                          stream: queryTipsRecord(
-                            queryBuilder: (tipsRecord) =>
-                                tipsRecord.orderBy('number'),
-                            singleRecord: true,
-                          ),
-                          builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
-                            if (!snapshot.hasData) {
-                              return Center(
-                                child: SizedBox(
-                                  width: 50.0,
-                                  height: 50.0,
-                                  child: CircularProgressIndicator(
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                      FlutterFlowTheme.of(context).primary,
-                                    ),
-                                  ),
-                                ),
-                              );
-                            }
-                            List<TipsRecord> tipTipsRecordList = snapshot.data!;
-                            // Return an empty Container when the item does not exist.
-                            if (snapshot.data!.isEmpty) {
-                              return Container();
-                            }
-                            final tipTipsRecord = tipTipsRecordList.isNotEmpty
-                                ? tipTipsRecordList.first
-                                : null;
-
-                            return TipWidget(
-                              key: Key(
-                                  'Key2pj_${listViewIndex}_of_${listViewTipsRecordList.length}'),
-                              tipDoc: tipTipsRecord!,
-                            );
-                          },
                         ),
                       );
-                    },
-                  );
-                },
-              ),
-            ],
+                    }
+                    List<TipsRecord> listViewTipsRecordList = snapshot.data!;
+
+                    return ListView.separated(
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      itemCount: listViewTipsRecordList.length,
+                      separatorBuilder: (_, __) => SizedBox(height: 10.0),
+                      itemBuilder: (context, listViewIndex) {
+                        final listViewTipsRecord =
+                            listViewTipsRecordList[listViewIndex];
+                        return Padding(
+                          padding: EdgeInsets.all(6.0),
+                          child: StreamBuilder<List<TipsRecord>>(
+                            stream: queryTipsRecord(
+                              queryBuilder: (tipsRecord) =>
+                                  tipsRecord.orderBy('number'),
+                              singleRecord: true,
+                            ),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 50.0,
+                                    height: 50.0,
+                                    child: CircularProgressIndicator(
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                        FlutterFlowTheme.of(context).primary,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }
+                              List<TipsRecord> tipTipsRecordList =
+                                  snapshot.data!;
+                              // Return an empty Container when the item does not exist.
+                              if (snapshot.data!.isEmpty) {
+                                return Container();
+                              }
+                              final tipTipsRecord = tipTipsRecordList.isNotEmpty
+                                  ? tipTipsRecordList.first
+                                  : null;
+
+                              return TipWidget(
+                                key: Key(
+                                    'Key2pj_${listViewIndex}_of_${listViewTipsRecordList.length}'),
+                                tipDoc: tipTipsRecord!,
+                              );
+                            },
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -105,11 +105,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
           builder: (context, params) => OnBoardingWidget(),
         ),
         FFRoute(
-          name: AddDreamWidget.routeName,
-          path: AddDreamWidget.routePath,
-          builder: (context, params) => AddDreamWidget(),
-        ),
-        FFRoute(
           name: ViewDreamUserWidget.routeName,
           path: ViewDreamUserWidget.routePath,
           asyncParams: {
@@ -130,16 +125,39 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
               : DreamListWidget(),
         ),
         FFRoute(
-          name: ProfileWidget.routeName,
-          path: ProfileWidget.routePath,
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'Profile')
-              : ProfileWidget(),
+          name: OtherUserProfileWidget.routeName,
+          path: OtherUserProfileWidget.routePath,
+          asyncParams: {
+            'profileView': getDoc(['users'], UsersRecord.fromSnapshot),
+          },
+          builder: (context, params) => OtherUserProfileWidget(
+            profileView: params.getParam(
+              'profileView',
+              ParamType.Document,
+            ),
+          ),
         ),
         FFRoute(
           name: SettingsWidget.routeName,
           path: SettingsWidget.routePath,
-          builder: (context, params) => SettingsWidget(),
+          builder: (context, params) => SettingsWidget(
+            wakeupTime: params.getParam(
+              'wakeupTime',
+              ParamType.DateTime,
+            ),
+            bedTime: params.getParam(
+              'bedTime',
+              ParamType.DateTime,
+            ),
+            ispm1: params.getParam(
+              'ispm1',
+              ParamType.bool,
+            ),
+            ispm2: params.getParam(
+              'ispm2',
+              ParamType.bool,
+            ),
+          ),
         ),
         FFRoute(
           name: ViewDreamOtherWidget.routeName,
@@ -172,9 +190,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
               params.isEmpty ? NavBarPage(initialPage: 'Tips') : TipsWidget(),
         ),
         FFRoute(
-          name: Auth2Widget.routeName,
-          path: Auth2Widget.routePath,
-          builder: (context, params) => Auth2Widget(),
+          name: ProfileWidget.routeName,
+          path: ProfileWidget.routePath,
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'Profile')
+              : ProfileWidget(),
+        ),
+        FFRoute(
+          name: AddDreamWidget.routeName,
+          path: AddDreamWidget.routePath,
+          builder: (context, params) => AddDreamWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

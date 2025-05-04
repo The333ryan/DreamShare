@@ -31,4 +31,11 @@ class FFAppState extends ChangeNotifier {
   set searchActive(bool value) {
     _searchActive = value;
   }
+
+  /// vfa
+  bool _autoDarkModeEnabled = false;
+  bool get autoDarkModeEnabled => _autoDarkModeEnabled;
+  set autoDarkModeEnabled(bool value) {
+    _autoDarkModeEnabled = value;
+  }
 }

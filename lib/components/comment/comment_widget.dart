@@ -50,7 +50,18 @@ class _CommentWidgetState extends State<CommentWidget> {
         width: double.infinity,
         height: 103.6,
         decoration: BoxDecoration(
-          color: FlutterFlowTheme.of(context).secondaryBackground,
+          color: valueOrDefault<Color>(
+            Theme.of(context).brightness == Brightness.dark
+                ? colorFromCssString(
+                    getRemoteConfigString('darkmode_background'),
+                    defaultColor: FlutterFlowTheme.of(context).secondary,
+                  )
+                : colorFromCssString(
+                    getRemoteConfigString('button_color_day'),
+                    defaultColor: Color(0xFFAACCFF),
+                  ),
+            FlutterFlowTheme.of(context).secondary,
+          ),
           borderRadius: BorderRadius.circular(24.0),
           shape: BoxShape.rectangle,
         ),
@@ -95,10 +106,36 @@ class _CommentWidgetState extends State<CommentWidget> {
                             style: FlutterFlowTheme.of(context)
                                 .titleMedium
                                 .override(
-                                  fontFamily: 'Exo 2',
+                                  font: GoogleFonts.exo2(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .titleMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .titleMedium
+                                        .fontStyle,
+                                  ),
+                                  color: valueOrDefault<Color>(
+                                    Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? colorFromCssString(
+                                            getRemoteConfigString('text_night'),
+                                            defaultColor: Color(0xFFAACCFF),
+                                          )
+                                        : colorFromCssString(
+                                            getRemoteConfigString('text_day'),
+                                            defaultColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondary,
+                                          ),
+                                    Color(0xFFAACCFF),
+                                  ),
                                   letterSpacing: 0.0,
-                                  useGoogleFonts:
-                                      GoogleFonts.asMap().containsKey('Exo 2'),
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .titleMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .titleMedium
+                                      .fontStyle,
                                 ),
                           ),
                         ),
@@ -111,10 +148,36 @@ class _CommentWidgetState extends State<CommentWidget> {
                           style: FlutterFlowTheme.of(context)
                               .bodyMedium
                               .override(
-                                fontFamily: 'Exo 2',
+                                font: GoogleFonts.exo2(
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontStyle,
+                                ),
+                                color: valueOrDefault<Color>(
+                                  Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? colorFromCssString(
+                                          getRemoteConfigString('text_night'),
+                                          defaultColor: Color(0xFFAACCFF),
+                                        )
+                                      : colorFromCssString(
+                                          getRemoteConfigString('text_day'),
+                                          defaultColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondary,
+                                        ),
+                                  Color(0xFFAACCFF),
+                                ),
                                 letterSpacing: 0.0,
-                                useGoogleFonts:
-                                    GoogleFonts.asMap().containsKey('Exo 2'),
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontStyle,
                               ),
                         ),
                       ],
@@ -132,12 +195,32 @@ class _CommentWidgetState extends State<CommentWidget> {
                   textAlign: TextAlign.start,
                   maxLines: 2,
                   style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Exo 2',
-                        color: Colors.black,
+                        font: GoogleFonts.exo2(
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .bodyMedium
+                              .fontWeight,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                        ),
+                        color: valueOrDefault<Color>(
+                          Theme.of(context).brightness == Brightness.dark
+                              ? colorFromCssString(
+                                  getRemoteConfigString('text_night'),
+                                  defaultColor: Color(0xFFAACCFF),
+                                )
+                              : colorFromCssString(
+                                  getRemoteConfigString('text_day'),
+                                  defaultColor:
+                                      FlutterFlowTheme.of(context).secondary,
+                                ),
+                          Color(0xFFAACCFF),
+                        ),
                         fontSize: 16.0,
                         letterSpacing: 0.0,
-                        useGoogleFonts:
-                            GoogleFonts.asMap().containsKey('Exo 2'),
+                        fontWeight:
+                            FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                        fontStyle:
+                            FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                       ),
                 ),
               ),

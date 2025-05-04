@@ -2,6 +2,7 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/dream/dream_widget.dart';
 import '/components/search_user/search_user_widget.dart';
+import '/flutter_flow/flutter_flow_ad_banner.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -38,6 +39,7 @@ class _DreamListWidgetState extends State<DreamListWidget>
       length: 2,
       initialIndex: 0,
     )..addListener(() => safeSetState(() {}));
+
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
@@ -61,153 +63,420 @@ class _DreamListWidgetState extends State<DreamListWidget>
           getRemoteConfigString('lightmode_background'),
           defaultColor: Color(0xFFC155FF),
         ),
-        floatingActionButton: FloatingActionButton(
-          key: ValueKey('FloatingActionButton_csqu'),
-          onPressed: () async {
-            logFirebaseEvent('DREAM_LIST_FloatingActionButton_k6pec3yo');
-            logFirebaseEvent('FloatingActionButton_navigate_to');
+        floatingActionButton: Align(
+          alignment: AlignmentDirectional(1.0, 0.85),
+          child: FloatingActionButton(
+            key: ValueKey('FloatingActionButton_csqu'),
+            onPressed: () async {
+              logFirebaseEvent('DREAM_LIST_FloatingActionButton_k6pec3yo');
+              logFirebaseEvent('FloatingActionButton_navigate_to');
 
-            context.pushNamed(AddDreamWidget.routeName);
+              context.pushNamed(AddDreamWidget.routeName);
 
-            logFirebaseEvent('FloatingActionButton_google_analytics_ev');
-            logFirebaseEvent(
-              'Add_Dream_On_Tap',
-              parameters: {
-                'User ID': currentUserUid,
-              },
-            );
-          },
-          backgroundColor: colorFromCssString(
-            getRemoteConfigString('darkmode_background'),
-            defaultColor: FlutterFlowTheme.of(context).secondary,
-          ),
-          elevation: 8.0,
-          child: Icon(
-            Icons.add_rounded,
-            color: FlutterFlowTheme.of(context).info,
-            size: 24.0,
+              logFirebaseEvent('FloatingActionButton_google_analytics_ev');
+              logFirebaseEvent(
+                'Add_Dream_On_Tap',
+                parameters: {
+                  'User ID': currentUserUid,
+                },
+              );
+            },
+            backgroundColor: valueOrDefault<Color>(
+              Theme.of(context).brightness == Brightness.dark
+                  ? colorFromCssString(
+                      getRemoteConfigString('button_color_night'),
+                      defaultColor: Color(0xFF4900FF),
+                    )
+                  : colorFromCssString(
+                      getRemoteConfigString('button_color_day'),
+                      defaultColor: Color(0xFFAACCFF),
+                    ),
+              Color(0xFF4900FF),
+            ),
+            elevation: 8.0,
+            child: Icon(
+              Icons.add_rounded,
+              color: valueOrDefault<Color>(
+                Theme.of(context).brightness == Brightness.dark
+                    ? colorFromCssString(
+                        getRemoteConfigString('text_night'),
+                        defaultColor: Color(0xFFAACCFF),
+                      )
+                    : colorFromCssString(
+                        getRemoteConfigString('text_day'),
+                        defaultColor: FlutterFlowTheme.of(context).secondary,
+                      ),
+                Color(0xFFAACCFF),
+              ),
+              size: 24.0,
+            ),
           ),
         ),
-        body: SafeArea(
-          top: true,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Align(
-                    alignment: AlignmentDirectional(0.0, 0.0),
-                    child: Text(
-                      key: ValueKey('DreamFeedText_mlb9'),
-                      'Dream Feed',
-                      style: FlutterFlowTheme.of(context).displayLarge.override(
-                            fontFamily: 'Exo 2',
-                            color: colorFromCssString(
-                              getRemoteConfigString('darkmode_background'),
-                              defaultColor:
-                                  FlutterFlowTheme.of(context).secondary,
-                            ),
-                            letterSpacing: 0.0,
-                            useGoogleFonts:
-                                GoogleFonts.asMap().containsKey('Exo 2'),
-                          ),
-                    ),
-                  ),
-                  Builder(
-                    builder: (context) => FlutterFlowIconButton(
-                      borderRadius: 8.0,
-                      fillColor: FlutterFlowTheme.of(context).primary,
-                      icon: Icon(
-                        Icons.search,
-                        color: FlutterFlowTheme.of(context).info,
-                        size: 30.0,
-                      ),
-                      onPressed: () async {
-                        logFirebaseEvent('DREAM_LIST_PAGE_search_ICN_ON_TAP');
-                        logFirebaseEvent('IconButton_alert_dialog');
-                        await showDialog(
-                          context: context,
-                          builder: (dialogContext) {
-                            return Dialog(
-                              elevation: 0,
-                              insetPadding: EdgeInsets.zero,
-                              backgroundColor: Colors.transparent,
-                              alignment: AlignmentDirectional(0.0, 0.0)
-                                  .resolve(Directionality.of(context)),
-                              child: GestureDetector(
-                                onTap: () {
-                                  FocusScope.of(dialogContext).unfocus();
-                                  FocusManager.instance.primaryFocus?.unfocus();
-                                },
-                                child: SearchUserWidget(),
-                              ),
-                            );
-                          },
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              Expanded(
-                child: Column(
+        body: Container(
+          height: double.infinity,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              image: Image.asset(
+                Theme.of(context).brightness == Brightness.dark
+                    ? 'assets/images/DreamshareNightBack.jpg'
+                    : 'assets/images/DreamshareDayBack.jpg',
+              ).image,
+            ),
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Align(
-                      alignment: Alignment(0.0, 0),
-                      child: TabBar(
-                        labelColor: FlutterFlowTheme.of(context).primaryText,
-                        unselectedLabelColor:
-                            FlutterFlowTheme.of(context).secondaryText,
-                        labelStyle:
-                            FlutterFlowTheme.of(context).titleMedium.override(
-                                  fontFamily: 'Exo 2',
-                                  letterSpacing: 0.0,
-                                  useGoogleFonts:
-                                      GoogleFonts.asMap().containsKey('Exo 2'),
-                                ),
-                        unselectedLabelStyle:
-                            FlutterFlowTheme.of(context).titleMedium.override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .titleMediumFamily,
-                                  letterSpacing: 0.0,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .titleMediumFamily),
-                                ),
-                        indicatorColor: FlutterFlowTheme.of(context).primary,
-                        tabs: [
-                          Tab(
-                            text: 'Friends',
-                          ),
-                          Tab(
-                            text: 'Everyone',
-                          ),
-                        ],
-                        controller: _model.tabBarController,
-                        onTap: (i) async {
-                          [() async {}, () async {}][i]();
-                        },
+                      alignment: AlignmentDirectional(0.0, 0.0),
+                      child: Text(
+                        key: ValueKey('DreamFeedText_mlb9'),
+                        'Dream Feed',
+                        style: FlutterFlowTheme.of(context)
+                            .displayLarge
+                            .override(
+                              font: GoogleFonts.exo2(
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .displayLarge
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .displayLarge
+                                    .fontStyle,
+                              ),
+                              color: valueOrDefault<Color>(
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? colorFromCssString(
+                                        getRemoteConfigString('text_night'),
+                                        defaultColor: Color(0xFFAACCFF),
+                                      )
+                                    : colorFromCssString(
+                                        getRemoteConfigString('text_day'),
+                                        defaultColor:
+                                            FlutterFlowTheme.of(context)
+                                                .secondary,
+                                      ),
+                                Color(0xFFAACCFF),
+                              ),
+                              letterSpacing: 0.0,
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .displayLarge
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .displayLarge
+                                  .fontStyle,
+                            ),
                       ),
                     ),
-                    Expanded(
-                      child: TabBarView(
-                        controller: _model.tabBarController,
-                        children: [
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 10.0, 0.0, 0.0),
-                            child: AuthUserStreamWidget(
-                              builder: (context) =>
-                                  StreamBuilder<List<DreamsRecord>>(
+                    Builder(
+                      builder: (context) => Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(15.0, 0.0, 0.0, 0.0),
+                        child: FlutterFlowIconButton(
+                          borderRadius: 8.0,
+                          fillColor: valueOrDefault<Color>(
+                            Theme.of(context).brightness == Brightness.dark
+                                ? colorFromCssString(
+                                    getRemoteConfigString(
+                                        'darkmode_background'),
+                                    defaultColor:
+                                        FlutterFlowTheme.of(context).secondary,
+                                  )
+                                : colorFromCssString(
+                                    getRemoteConfigString('button_color_day'),
+                                    defaultColor: Color(0xFFAACCFF),
+                                  ),
+                            FlutterFlowTheme.of(context).secondary,
+                          ),
+                          icon: Icon(
+                            Icons.search,
+                            color: valueOrDefault<Color>(
+                              Theme.of(context).brightness == Brightness.dark
+                                  ? colorFromCssString(
+                                      getRemoteConfigString('text_night'),
+                                      defaultColor: Color(0xFFAACCFF),
+                                    )
+                                  : colorFromCssString(
+                                      getRemoteConfigString('text_day'),
+                                      defaultColor: FlutterFlowTheme.of(context)
+                                          .secondary,
+                                    ),
+                              Color(0xFFAACCFF),
+                            ),
+                            size: 30.0,
+                          ),
+                          onPressed: () async {
+                            logFirebaseEvent(
+                                'DREAM_LIST_PAGE_search_ICN_ON_TAP');
+                            logFirebaseEvent('IconButton_alert_dialog');
+                            await showDialog(
+                              context: context,
+                              builder: (dialogContext) {
+                                return Dialog(
+                                  elevation: 0,
+                                  insetPadding: EdgeInsets.zero,
+                                  backgroundColor: Colors.transparent,
+                                  alignment: AlignmentDirectional(0.0, 0.0)
+                                      .resolve(Directionality.of(context)),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      FocusScope.of(dialogContext).unfocus();
+                                      FocusManager.instance.primaryFocus
+                                          ?.unfocus();
+                                    },
+                                    child: SearchUserWidget(),
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Expanded(
+                  child: Column(
+                    children: [
+                      Align(
+                        alignment: Alignment(0.0, 0),
+                        child: TabBar(
+                          labelColor: valueOrDefault<Color>(
+                            Theme.of(context).brightness == Brightness.dark
+                                ? colorFromCssString(
+                                    getRemoteConfigString('text_night'),
+                                    defaultColor: Color(0xFFAACCFF),
+                                  )
+                                : colorFromCssString(
+                                    getRemoteConfigString('text_day'),
+                                    defaultColor:
+                                        FlutterFlowTheme.of(context).secondary,
+                                  ),
+                            Color(0xFFAACCFF),
+                          ),
+                          unselectedLabelColor:
+                              FlutterFlowTheme.of(context).secondaryText,
+                          labelStyle:
+                              FlutterFlowTheme.of(context).titleMedium.override(
+                                    font: GoogleFonts.exo2(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .fontStyle,
+                                    ),
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .titleMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .titleMedium
+                                        .fontStyle,
+                                  ),
+                          unselectedLabelStyle: FlutterFlowTheme.of(context)
+                              .titleMedium
+                              .override(
+                                font: FlutterFlowTheme.of(context).titleMedium,
+                                letterSpacing: 0.0,
+                              ),
+                          indicatorColor: FlutterFlowTheme.of(context).primary,
+                          tabs: [
+                            Tab(
+                              text: 'Friends',
+                            ),
+                            Tab(
+                              text: 'Everyone',
+                            ),
+                          ],
+                          controller: _model.tabBarController,
+                          onTap: (i) async {
+                            [() async {}, () async {}][i]();
+                          },
+                        ),
+                      ),
+                      Expanded(
+                        child: TabBarView(
+                          controller: _model.tabBarController,
+                          children: [
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 10.0, 0.0, 0.0),
+                              child: AuthUserStreamWidget(
+                                builder: (context) =>
+                                    StreamBuilder<List<DreamsRecord>>(
+                                  stream: queryDreamsRecord(
+                                    queryBuilder: (dreamsRecord) => dreamsRecord
+                                        .whereIn(
+                                            'uid',
+                                            (currentUserDocument?.following
+                                                    .toList() ??
+                                                []))
+                                        .where(
+                                          'isPublic',
+                                          isEqualTo: true,
+                                        ),
+                                  ),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50.0,
+                                          height: 50.0,
+                                          child: CircularProgressIndicator(
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                    List<DreamsRecord>
+                                        listViewDreamsRecordList =
+                                        snapshot.data!;
+
+                                    return ListView.builder(
+                                      padding: EdgeInsets.zero,
+                                      scrollDirection: Axis.vertical,
+                                      itemCount:
+                                          listViewDreamsRecordList.length,
+                                      itemBuilder: (context, listViewIndex) {
+                                        final listViewDreamsRecord =
+                                            listViewDreamsRecordList[
+                                                listViewIndex];
+                                        return Padding(
+                                          padding: EdgeInsets.all(6.0),
+                                          child:
+                                              StreamBuilder<List<UsersRecord>>(
+                                            stream: queryUsersRecord(
+                                              queryBuilder: (usersRecord) =>
+                                                  usersRecord.whereIn(
+                                                      'uid',
+                                                      (currentUserDocument
+                                                              ?.following
+                                                              .toList() ??
+                                                          [])),
+                                              singleRecord: true,
+                                            ),
+                                            builder: (context, snapshot) {
+                                              // Customize what your widget looks like when it's loading.
+                                              if (!snapshot.hasData) {
+                                                return Center(
+                                                  child: SizedBox(
+                                                    width: 50.0,
+                                                    height: 50.0,
+                                                    child:
+                                                        CircularProgressIndicator(
+                                                      valueColor:
+                                                          AlwaysStoppedAnimation<
+                                                              Color>(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primary,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                );
+                                              }
+                                              List<UsersRecord>
+                                                  dreamUsersRecordList =
+                                                  snapshot.data!;
+                                              // Return an empty Container when the item does not exist.
+                                              if (snapshot.data!.isEmpty) {
+                                                return Container();
+                                              }
+                                              final dreamUsersRecord =
+                                                  dreamUsersRecordList
+                                                          .isNotEmpty
+                                                      ? dreamUsersRecordList
+                                                          .first
+                                                      : null;
+
+                                              return InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  logFirebaseEvent(
+                                                      'DREAM_LIST_Container_rfa73ojg_ON_TAP');
+                                                  logFirebaseEvent(
+                                                      'Dream_navigate_to');
+
+                                                  context.pushNamed(
+                                                    ViewDreamOtherWidget
+                                                        .routeName,
+                                                    queryParameters: {
+                                                      'dreamView':
+                                                          serializeParam(
+                                                        listViewDreamsRecord,
+                                                        ParamType.Document,
+                                                      ),
+                                                      'authorDocReference':
+                                                          serializeParam(
+                                                        dreamUsersRecord
+                                                            ?.reference,
+                                                        ParamType
+                                                            .DocumentReference,
+                                                      ),
+                                                      'authorDoc':
+                                                          serializeParam(
+                                                        dreamUsersRecord,
+                                                        ParamType.Document,
+                                                      ),
+                                                    }.withoutNulls,
+                                                    extra: <String, dynamic>{
+                                                      'dreamView':
+                                                          listViewDreamsRecord,
+                                                      'authorDoc':
+                                                          dreamUsersRecord,
+                                                    },
+                                                  );
+
+                                                  logFirebaseEvent(
+                                                      'Dream_google_analytics_event');
+                                                  logFirebaseEvent(
+                                                    'Dream_On_Tap',
+                                                    parameters: {
+                                                      'User ID': currentUserUid,
+                                                    },
+                                                  );
+                                                },
+                                                child: DreamWidget(
+                                                  key: Key(
+                                                      'Keyrfa_${listViewIndex}_of_${listViewDreamsRecordList.length}'),
+                                                  dreamDoc:
+                                                      listViewDreamsRecord,
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 10.0, 0.0, 0.0),
+                              child: StreamBuilder<List<DreamsRecord>>(
                                 stream: queryDreamsRecord(
                                   queryBuilder: (dreamsRecord) =>
-                                      dreamsRecord.whereIn(
-                                          'uid',
-                                          (currentUserDocument?.following
-                                                  .toList() ??
-                                              [])),
+                                      dreamsRecord.where(
+                                    'isPublic',
+                                    isEqualTo: true,
+                                  ),
                                 ),
                                 builder: (context, snapshot) {
                                   // Customize what your widget looks like when it's loading.
@@ -289,7 +558,7 @@ class _DreamListWidgetState extends State<DreamListWidget>
                                                   Colors.transparent,
                                               onTap: () async {
                                                 logFirebaseEvent(
-                                                    'DREAM_LIST_Container_rfa73ojg_ON_TAP');
+                                                    'DREAM_LIST_Container_q38m4kit_ON_TAP');
                                                 logFirebaseEvent(
                                                     'Dream_navigate_to');
 
@@ -332,7 +601,7 @@ class _DreamListWidgetState extends State<DreamListWidget>
                                               },
                                               child: DreamWidget(
                                                 key: Key(
-                                                    'Keyrfa_${listViewIndex}_of_${listViewDreamsRecordList.length}'),
+                                                    'Keyq38_${listViewIndex}_of_${listViewDreamsRecordList.length}'),
                                                 dreamDoc: listViewDreamsRecord,
                                               ),
                                             );
@@ -344,151 +613,19 @@ class _DreamListWidgetState extends State<DreamListWidget>
                                 },
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 10.0, 0.0, 0.0),
-                            child: StreamBuilder<List<DreamsRecord>>(
-                              stream: queryDreamsRecord(
-                                queryBuilder: (dreamsRecord) =>
-                                    dreamsRecord.where(
-                                  'uid',
-                                  isEqualTo: currentUserUid,
-                                ),
-                              ),
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 50.0,
-                                      height: 50.0,
-                                      child: CircularProgressIndicator(
-                                        valueColor:
-                                            AlwaysStoppedAnimation<Color>(
-                                          FlutterFlowTheme.of(context).primary,
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                }
-                                List<DreamsRecord> listViewDreamsRecordList =
-                                    snapshot.data!;
-
-                                return ListView.builder(
-                                  padding: EdgeInsets.zero,
-                                  scrollDirection: Axis.vertical,
-                                  itemCount: listViewDreamsRecordList.length,
-                                  itemBuilder: (context, listViewIndex) {
-                                    final listViewDreamsRecord =
-                                        listViewDreamsRecordList[listViewIndex];
-                                    return Padding(
-                                      padding: EdgeInsets.all(6.0),
-                                      child: StreamBuilder<List<UsersRecord>>(
-                                        stream: queryUsersRecord(
-                                          queryBuilder: (usersRecord) =>
-                                              usersRecord.where(
-                                            'uid',
-                                            isEqualTo: listViewDreamsRecord.uid,
-                                          ),
-                                          singleRecord: true,
-                                        ),
-                                        builder: (context, snapshot) {
-                                          // Customize what your widget looks like when it's loading.
-                                          if (!snapshot.hasData) {
-                                            return Center(
-                                              child: SizedBox(
-                                                width: 50.0,
-                                                height: 50.0,
-                                                child:
-                                                    CircularProgressIndicator(
-                                                  valueColor:
-                                                      AlwaysStoppedAnimation<
-                                                          Color>(
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                  ),
-                                                ),
-                                              ),
-                                            );
-                                          }
-                                          List<UsersRecord>
-                                              dreamUsersRecordList =
-                                              snapshot.data!;
-                                          // Return an empty Container when the item does not exist.
-                                          if (snapshot.data!.isEmpty) {
-                                            return Container();
-                                          }
-                                          final dreamUsersRecord =
-                                              dreamUsersRecordList.isNotEmpty
-                                                  ? dreamUsersRecordList.first
-                                                  : null;
-
-                                          return InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            onTap: () async {
-                                              logFirebaseEvent(
-                                                  'DREAM_LIST_Container_q38m4kit_ON_TAP');
-                                              logFirebaseEvent(
-                                                  'Dream_navigate_to');
-
-                                              context.pushNamed(
-                                                ViewDreamOtherWidget.routeName,
-                                                queryParameters: {
-                                                  'dreamView': serializeParam(
-                                                    listViewDreamsRecord,
-                                                    ParamType.Document,
-                                                  ),
-                                                  'authorDocReference':
-                                                      serializeParam(
-                                                    dreamUsersRecord?.reference,
-                                                    ParamType.DocumentReference,
-                                                  ),
-                                                  'authorDoc': serializeParam(
-                                                    dreamUsersRecord,
-                                                    ParamType.Document,
-                                                  ),
-                                                }.withoutNulls,
-                                                extra: <String, dynamic>{
-                                                  'dreamView':
-                                                      listViewDreamsRecord,
-                                                  'authorDoc': dreamUsersRecord,
-                                                },
-                                              );
-
-                                              logFirebaseEvent(
-                                                  'Dream_google_analytics_event');
-                                              logFirebaseEvent(
-                                                'Dream_On_Tap',
-                                                parameters: {
-                                                  'User ID': currentUserUid,
-                                                },
-                                              );
-                                            },
-                                            child: DreamWidget(
-                                              key: Key(
-                                                  'Keyq38_${listViewIndex}_of_${listViewDreamsRecordList.length}'),
-                                              dreamDoc: listViewDreamsRecord,
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                    );
-                                  },
-                                );
-                              },
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+                FlutterFlowAdBanner(
+                  height: 50.0,
+                  showsTestAd: true,
+                  androidAdUnitID: 'ca-app-pub-8275745562074405/3884207984',
+                ),
+              ],
+            ),
           ),
         ),
       ),

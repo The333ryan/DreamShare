@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>DreamShare</string>
+	<string>DreamShare-Developmentation</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 
@@ -37,10 +37,10 @@
         <key>CFBundleTypeRole</key>
         <string>Editor</string>
         <key>CFBundleURLName</key>
-        <string>dreamshare.com</string>
+        <string>dreamsharedevelopmentation.com</string>
         <key>CFBundleURLSchemes</key>
         <array>
-        <string>dreamshare</string>
+        <string>dreamsharedevelopmentation</string>
         </array>
         </dict>
     </array>
@@ -80,6 +80,16 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-
+  <key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-8275745562074405~6325479006</string>
+	<key>SKAdNetworkItems</key>
+		<array>
+			<dict>
+				<key>SKAdNetworkIdentifier</key>
+				<string>cstr6suwn9.skadnetwork</string>
+			</dict>
+		</array>
+	<key>io.flutter.embedded_views_preview</key>
+	<true/>
 </dict>
 </plist>

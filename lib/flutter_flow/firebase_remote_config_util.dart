@@ -9,6 +9,10 @@ Future initializeFirebaseRemoteConfig() async {
     await FirebaseRemoteConfig.instance.setDefaults(const {
       'lightmode_background': '#C155FF',
       'darkmode_background': '#0C0040',
+      'button_color_day': '#AACCFF',
+      'button_color_night': '#4900FF',
+      'text_day': '#0C0040',
+      'text_night': '#AACCFF',
     });
     await FirebaseRemoteConfig.instance.fetchAndActivate();
   } catch (error) {

@@ -1,3 +1,4 @@
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'search_user_widget.dart' show SearchUserWidget;
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ class SearchUserModel extends FlutterFlowModel<SearchUserWidget> {
   TextEditingController? textController;
   String? textFieldSelectedOption;
   String? Function(BuildContext, String?)? textControllerValidator;
+  List<UsersRecord> simpleSearchResults = [];
 
   @override
   void initState(BuildContext context) {}

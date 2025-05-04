@@ -1,4 +1,4 @@
-name: dream_share
+name: dream_share_developmentation
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -67,6 +67,7 @@ dependencies:
   from_css_color: 2.0.0
   go_router: 12.1.3
   google_fonts: 6.1.0
+  google_mobile_ads: 5.1.0
   google_sign_in: 6.2.1
   google_sign_in_android: 6.1.30
   google_sign_in_ios: 5.7.7
@@ -109,6 +110,7 @@ dependencies:
   sqflite_common: 2.5.4+3
   stream_transform: 2.1.0
   substring_highlight: 1.0.33
+  text_search: 1.0.1
   timeago: 3.6.1
   url_launcher: 6.3.0
   url_launcher_android: 6.3.10
@@ -174,6 +176,7 @@ flutter:
     - assets/pdfs/
     - assets/jsons/
 
+    - assets/environment_values/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

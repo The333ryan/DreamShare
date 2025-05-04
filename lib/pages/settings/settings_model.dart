@@ -12,16 +12,16 @@ class SettingsModel extends FlutterFlowModel<SettingsWidget> {
   TextEditingController? wakeupTimeFieldTextController;
   String? Function(BuildContext, String?)?
       wakeupTimeFieldTextControllerValidator;
-  // State field(s) for DropDown widget.
-  String? dropDownValue1;
-  FormFieldController<String>? dropDownValueController1;
+  // State field(s) for DropDown1 widget.
+  String? dropDown1Value;
+  FormFieldController<String>? dropDown1ValueController;
   // State field(s) for bedTimeField widget.
   FocusNode? bedTimeFieldFocusNode;
   TextEditingController? bedTimeFieldTextController;
   String? Function(BuildContext, String?)? bedTimeFieldTextControllerValidator;
-  // State field(s) for DropDown widget.
-  String? dropDownValue2;
-  FormFieldController<String>? dropDownValueController2;
+  // State field(s) for DropDown2 widget.
+  String? dropDown2Value;
+  FormFieldController<String>? dropDown2ValueController;
 
   @override
   void initState(BuildContext context) {}

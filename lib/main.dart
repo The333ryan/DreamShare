@@ -17,6 +17,9 @@ void main() async {
   GoRouter.optionURLReflectsImperativeAPIs = true;
   usePathUrlStrategy();
 
+  final environmentValues = FFDevEnvironmentValues();
+  await environmentValues.initialize();
+
   await initFirebase();
 
   await FlutterFlowTheme.initialize();
@@ -82,7 +85,7 @@ class _MyAppState extends State<MyApp> {
 
     _appStateNotifier = AppStateNotifier.instance;
     _router = createRouter(_appStateNotifier, widget.entryPage);
-    userStream = dreamShareFirebaseUserStream()
+    userStream = dreamShareDevelopmentationFirebaseUserStream()
       ..listen((user) {
         _appStateNotifier.update(user);
       });
@@ -109,7 +112,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      title: 'DreamShare',
+      title: 'DreamShare-Developmentation',
       scrollBehavior: MyAppScrollBehavior(),
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
@@ -157,8 +160,8 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     final tabs = {
       'DreamList': DreamListWidget(),
-      'Profile': ProfileWidget(),
       'Tips': TipsWidget(),
+      'Profile': ProfileWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -187,18 +190,18 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.person,
-              size: 24.0,
-            ),
-            label: 'Profile',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
               Icons.lightbulb_outlined,
               size: 24.0,
             ),
             label: 'Tips',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.person,
+              size: 24.0,
+            ),
+            label: 'Profile',
             tooltip: '',
           )
         ],

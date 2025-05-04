@@ -105,11 +105,16 @@ class _GlowingButtonWidgetState extends State<GlowingButtonWidget> {
               iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
               color: FlutterFlowTheme.of(context).primary,
               textStyle: FlutterFlowTheme.of(context).titleMedium.override(
-                    fontFamily: 'Exo 2',
+                    font: GoogleFonts.exo2(
+                      fontWeight: FontWeight.w600,
+                      fontStyle:
+                          FlutterFlowTheme.of(context).titleMedium.fontStyle,
+                    ),
                     color: Colors.white,
                     letterSpacing: 0.0,
                     fontWeight: FontWeight.w600,
-                    useGoogleFonts: GoogleFonts.asMap().containsKey('Exo 2'),
+                    fontStyle:
+                        FlutterFlowTheme.of(context).titleMedium.fontStyle,
                   ),
               elevation: 0.0,
               borderSide: BorderSide(

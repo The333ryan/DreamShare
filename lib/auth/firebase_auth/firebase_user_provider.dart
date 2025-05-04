@@ -5,8 +5,8 @@ import '../base_auth_user_provider.dart';
 
 export '../base_auth_user_provider.dart';
 
-class DreamShareFirebaseUser extends BaseAuthUser {
-  DreamShareFirebaseUser(this.user);
+class DreamShareDevelopmentationFirebaseUser extends BaseAuthUser {
+  DreamShareDevelopmentationFirebaseUser(this.user);
   User? user;
   bool get loggedIn => user != null;
 
@@ -59,17 +59,18 @@ class DreamShareFirebaseUser extends BaseAuthUser {
   static BaseAuthUser fromUserCredential(UserCredential userCredential) =>
       fromFirebaseUser(userCredential.user);
   static BaseAuthUser fromFirebaseUser(User? user) =>
-      DreamShareFirebaseUser(user);
+      DreamShareDevelopmentationFirebaseUser(user);
 }
 
-Stream<BaseAuthUser> dreamShareFirebaseUserStream() => FirebaseAuth.instance
+Stream<BaseAuthUser> dreamShareDevelopmentationFirebaseUserStream() =>
+    FirebaseAuth.instance
         .authStateChanges()
         .debounce((user) => user == null && !loggedIn
             ? TimerStream(true, const Duration(seconds: 1))
             : Stream.value(user))
         .map<BaseAuthUser>(
       (user) {
-        currentUser = DreamShareFirebaseUser(user);
+        currentUser = DreamShareDevelopmentationFirebaseUser(user);
         return currentUser!;
       },
     );

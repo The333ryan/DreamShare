@@ -20,7 +20,8 @@ class ProfileWidget extends StatefulWidget {
   State<ProfileWidget> createState() => _ProfileWidgetState();
 }
 
-class _ProfileWidgetState extends State<ProfileWidget> {
+class _ProfileWidgetState extends State<ProfileWidget>
+    with TickerProviderStateMixin {
   late ProfileModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -31,6 +32,12 @@ class _ProfileWidgetState extends State<ProfileWidget> {
     _model = createModel(context, () => ProfileModel());
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Profile'});
+    _model.tabBarController = TabController(
+      vsync: this,
+      length: 2,
+      initialIndex: 0,
+    )..addListener(() => safeSetState(() {}));
+
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
@@ -56,7 +63,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
-            logFirebaseEvent('PROFILE_FloatingActionButton_zn0w9wte_ON');
+            logFirebaseEvent('PROFILE_FloatingActionButton_p01jalhz_ON');
             logFirebaseEvent('FloatingActionButton_navigate_to');
 
             context.pushNamed(AddDreamWidget.routeName);
@@ -69,250 +76,557 @@ class _ProfileWidgetState extends State<ProfileWidget> {
               },
             );
           },
-          backgroundColor: FlutterFlowTheme.of(context).primary,
+          backgroundColor: valueOrDefault<Color>(
+            Theme.of(context).brightness == Brightness.dark
+                ? colorFromCssString(
+                    getRemoteConfigString('button_color_night'),
+                    defaultColor: Color(0xFF4900FF),
+                  )
+                : colorFromCssString(
+                    getRemoteConfigString('button_color_day'),
+                    defaultColor: Color(0xFFAACCFF),
+                  ),
+            Color(0xFF4900FF),
+          ),
           elevation: 8.0,
           child: Icon(
             Icons.add_rounded,
-            color: FlutterFlowTheme.of(context).info,
+            color: valueOrDefault<Color>(
+              Theme.of(context).brightness == Brightness.dark
+                  ? colorFromCssString(
+                      getRemoteConfigString('text_night'),
+                      defaultColor: Color(0xFFAACCFF),
+                    )
+                  : colorFromCssString(
+                      getRemoteConfigString('text_day'),
+                      defaultColor: FlutterFlowTheme.of(context).secondary,
+                    ),
+              Color(0xFFAACCFF),
+            ),
             size: 24.0,
           ),
         ),
-        body: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 10.0, 0.0),
-                  child: FlutterFlowIconButton(
-                    key: ValueKey('IconButton_eqf7'),
-                    borderRadius: 8.0,
-                    buttonSize: 40.0,
-                    fillColor: FlutterFlowTheme.of(context).primary,
-                    icon: Icon(
-                      Icons.settings_sharp,
-                      color: FlutterFlowTheme.of(context).info,
-                      size: 24.0,
-                    ),
-                    onPressed: () async {
-                      logFirebaseEvent(
-                          'PROFILE_PAGE_settings_sharp_ICN_ON_TAP');
-                      logFirebaseEvent('IconButton_navigate_to');
-
-                      context.pushNamed(SettingsWidget.routeName);
-                    },
-                  ),
-                ),
-              ],
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              image: Image.asset(
+                Theme.of(context).brightness == Brightness.dark
+                    ? 'assets/images/DreamshareNightBack.jpg'
+                    : 'assets/images/DreamshareDayBack.jpg',
+              ).image,
             ),
-            Container(
-              width: 100.0,
-              height: 100.0,
-              decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).secondaryBackground,
-                shape: BoxShape.circle,
-              ),
-              child: AuthUserStreamWidget(
-                builder: (context) => ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: Image.network(
-                    currentUserPhoto,
-                    width: 200.0,
-                    height: 200.0,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
-            ),
-            AuthUserStreamWidget(
-              builder: (context) => Text(
-                currentUserDisplayName,
-                style: FlutterFlowTheme.of(context).displayLarge.override(
-                      fontFamily: 'Exo 2',
-                      color: colorFromCssString(
-                        getRemoteConfigString('darkmode_background'),
-                        defaultColor: FlutterFlowTheme.of(context).secondary,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 10.0, 0.0),
+                    child: FlutterFlowIconButton(
+                      borderRadius: 8.0,
+                      buttonSize: 40.0,
+                      fillColor: valueOrDefault<Color>(
+                        Theme.of(context).brightness == Brightness.dark
+                            ? colorFromCssString(
+                                getRemoteConfigString('button_color_night'),
+                                defaultColor: Color(0xFF4900FF),
+                              )
+                            : colorFromCssString(
+                                getRemoteConfigString('button_color_day'),
+                                defaultColor: Color(0xFFAACCFF),
+                              ),
+                        Color(0xFF4900FF),
                       ),
-                      letterSpacing: 0.0,
-                      useGoogleFonts: GoogleFonts.asMap().containsKey('Exo 2'),
+                      icon: Icon(
+                        Icons.settings_sharp,
+                        color: valueOrDefault<Color>(
+                          Theme.of(context).brightness == Brightness.dark
+                              ? colorFromCssString(
+                                  getRemoteConfigString('text_night'),
+                                  defaultColor: Color(0xFFAACCFF),
+                                )
+                              : colorFromCssString(
+                                  getRemoteConfigString('text_day'),
+                                  defaultColor:
+                                      FlutterFlowTheme.of(context).secondary,
+                                ),
+                          Color(0xFFAACCFF),
+                        ),
+                        size: 24.0,
+                      ),
+                      onPressed: () async {
+                        logFirebaseEvent(
+                            'PROFILE_PAGE_settings_sharp_ICN_ON_TAP');
+                        logFirebaseEvent('IconButton_navigate_to');
+
+                        context.pushNamed(SettingsWidget.routeName);
+                      },
                     ),
+                  ),
+                ],
               ),
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Align(
-                  alignment: AlignmentDirectional(-1.0, 0.0),
-                  child: Column(
+              Container(
+                width: 100.0,
+                height: 100.0,
+                decoration: BoxDecoration(
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                  shape: BoxShape.circle,
+                ),
+                child: AuthUserStreamWidget(
+                  builder: (context) => ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: Image.network(
+                      currentUserPhoto,
+                      width: 200.0,
+                      height: 200.0,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                ),
+              ),
+              AuthUserStreamWidget(
+                builder: (context) => Text(
+                  currentUserDisplayName,
+                  style: FlutterFlowTheme.of(context).displayLarge.override(
+                        font: GoogleFonts.exo2(
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .displayLarge
+                              .fontWeight,
+                          fontStyle: FlutterFlowTheme.of(context)
+                              .displayLarge
+                              .fontStyle,
+                        ),
+                        color: valueOrDefault<Color>(
+                          Theme.of(context).brightness == Brightness.dark
+                              ? colorFromCssString(
+                                  getRemoteConfigString('text_night'),
+                                  defaultColor: Color(0xFFAACCFF),
+                                )
+                              : colorFromCssString(
+                                  getRemoteConfigString('text_day'),
+                                  defaultColor:
+                                      FlutterFlowTheme.of(context).secondary,
+                                ),
+                          Color(0xFFAACCFF),
+                        ),
+                        letterSpacing: 0.0,
+                        fontWeight: FlutterFlowTheme.of(context)
+                            .displayLarge
+                            .fontWeight,
+                        fontStyle:
+                            FlutterFlowTheme.of(context).displayLarge.fontStyle,
+                      ),
+                ),
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Align(
+                    alignment: AlignmentDirectional(-1.0, 0.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        AuthUserStreamWidget(
+                          builder: (context) => Text(
+                            valueOrDefault<String>(
+                              (currentUserDocument?.following.toList() ?? [])
+                                  .length
+                                  .toString(),
+                              '0',
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .titleLarge
+                                .override(
+                                  font: GoogleFonts.exo2(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .titleLarge
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .titleLarge
+                                        .fontStyle,
+                                  ),
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .titleLarge
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .titleLarge
+                                      .fontStyle,
+                                ),
+                          ),
+                        ),
+                        Text(
+                          'Following',
+                          style:
+                              FlutterFlowTheme.of(context).titleLarge.override(
+                                    font: GoogleFonts.exo2(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .titleLarge
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleLarge
+                                          .fontStyle,
+                                    ),
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .titleLarge
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .titleLarge
+                                        .fontStyle,
+                                  ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Column(
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       AuthUserStreamWidget(
                         builder: (context) => Text(
                           valueOrDefault<String>(
-                            (currentUserDocument?.following.toList() ?? [])
+                            (currentUserDocument?.followers.toList() ?? [])
                                 .length
                                 .toString(),
                             '0',
                           ),
-                          style: FlutterFlowTheme.of(context)
-                              .titleLarge
-                              .override(
-                                fontFamily: 'Exo 2',
-                                letterSpacing: 0.0,
-                                useGoogleFonts:
-                                    GoogleFonts.asMap().containsKey('Exo 2'),
-                              ),
+                          style:
+                              FlutterFlowTheme.of(context).titleLarge.override(
+                                    font: GoogleFonts.exo2(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .titleLarge
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleLarge
+                                          .fontStyle,
+                                    ),
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .titleLarge
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .titleLarge
+                                        .fontStyle,
+                                  ),
                         ),
                       ),
                       Text(
-                        'Following',
+                        'Followers',
                         style: FlutterFlowTheme.of(context).titleLarge.override(
-                              fontFamily: 'Exo 2',
+                              font: GoogleFonts.exo2(
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .titleLarge
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .titleLarge
+                                    .fontStyle,
+                              ),
                               letterSpacing: 0.0,
-                              useGoogleFonts:
-                                  GoogleFonts.asMap().containsKey('Exo 2'),
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .titleLarge
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .titleLarge
+                                  .fontStyle,
                             ),
                       ),
                     ],
                   ),
-                ),
-                Column(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                ].divide(SizedBox(width: 50.0)),
+              ),
+              Text(
+                'Recent Posts',
+                style: FlutterFlowTheme.of(context).bodyLarge.override(
+                      font: FlutterFlowTheme.of(context).bodyLarge,
+                      letterSpacing: 0.0,
+                    ),
+              ),
+              Expanded(
+                child: Column(
                   children: [
-                    AuthUserStreamWidget(
-                      builder: (context) => Text(
-                        valueOrDefault<String>(
-                          (currentUserDocument?.followers.toList() ?? [])
-                              .length
-                              .toString(),
-                          '0',
+                    Align(
+                      alignment: Alignment(0.0, 0),
+                      child: TabBar(
+                        labelColor: valueOrDefault<Color>(
+                          Theme.of(context).brightness == Brightness.dark
+                              ? colorFromCssString(
+                                  getRemoteConfigString('text_night'),
+                                  defaultColor: Color(0xFFAACCFF),
+                                )
+                              : colorFromCssString(
+                                  getRemoteConfigString('text_day'),
+                                  defaultColor:
+                                      FlutterFlowTheme.of(context).secondary,
+                                ),
+                          Color(0xFFAACCFF),
                         ),
-                        style: FlutterFlowTheme.of(context).titleLarge.override(
-                              fontFamily: 'Exo 2',
+                        unselectedLabelColor:
+                            FlutterFlowTheme.of(context).secondaryText,
+                        labelStyle: FlutterFlowTheme.of(context)
+                            .titleMedium
+                            .override(
+                              font: FlutterFlowTheme.of(context).titleMedium,
                               letterSpacing: 0.0,
-                              useGoogleFonts:
-                                  GoogleFonts.asMap().containsKey('Exo 2'),
                             ),
+                        unselectedLabelStyle: FlutterFlowTheme.of(context)
+                            .titleMedium
+                            .override(
+                              font: FlutterFlowTheme.of(context).titleMedium,
+                              letterSpacing: 0.0,
+                            ),
+                        indicatorColor: FlutterFlowTheme.of(context).primary,
+                        tabs: [
+                          Tab(
+                            text: 'Public',
+                          ),
+                          Tab(
+                            text: 'Private',
+                          ),
+                        ],
+                        controller: _model.tabBarController,
+                        onTap: (i) async {
+                          [() async {}, () async {}][i]();
+                        },
                       ),
                     ),
-                    Text(
-                      'Followers',
-                      style: FlutterFlowTheme.of(context).titleLarge.override(
-                            fontFamily: 'Exo 2',
-                            letterSpacing: 0.0,
-                            useGoogleFonts:
-                                GoogleFonts.asMap().containsKey('Exo 2'),
+                    Expanded(
+                      child: TabBarView(
+                        controller: _model.tabBarController,
+                        children: [
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Flexible(
+                                child: StreamBuilder<List<DreamsRecord>>(
+                                  stream: queryDreamsRecord(
+                                    queryBuilder: (dreamsRecord) => dreamsRecord
+                                        .where(
+                                          'uid',
+                                          isEqualTo: currentUserUid,
+                                        )
+                                        .where(
+                                          'isPublic',
+                                          isEqualTo: true,
+                                        ),
+                                  ),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50.0,
+                                          height: 50.0,
+                                          child: CircularProgressIndicator(
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                    List<DreamsRecord>
+                                        listViewDreamsRecordList =
+                                        snapshot.data!;
+
+                                    return InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        logFirebaseEvent(
+                                            'PROFILE_PAGE_ListView_gmoz16jo_ON_TAP');
+                                        logFirebaseEvent(
+                                            'ListView_google_analytics_event');
+                                        logFirebaseEvent(
+                                            'Dream_On_Tap_Profile');
+                                      },
+                                      child: ListView.builder(
+                                        padding: EdgeInsets.zero,
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.vertical,
+                                        itemCount:
+                                            listViewDreamsRecordList.length,
+                                        itemBuilder: (context, listViewIndex) {
+                                          final listViewDreamsRecord =
+                                              listViewDreamsRecordList[
+                                                  listViewIndex];
+                                          return Padding(
+                                            padding: EdgeInsets.all(6.0),
+                                            child: InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                logFirebaseEvent(
+                                                    'PROFILE_PAGE_Container_j8n9pmwj_ON_TAP');
+                                                logFirebaseEvent(
+                                                    'Dream_navigate_to');
+
+                                                context.pushNamed(
+                                                  ViewDreamUserWidget.routeName,
+                                                  queryParameters: {
+                                                    'dreamDoc': serializeParam(
+                                                      listViewDreamsRecord,
+                                                      ParamType.Document,
+                                                    ),
+                                                  }.withoutNulls,
+                                                  extra: <String, dynamic>{
+                                                    'dreamDoc':
+                                                        listViewDreamsRecord,
+                                                  },
+                                                );
+
+                                                logFirebaseEvent(
+                                                    'Dream_google_analytics_event');
+                                                logFirebaseEvent(
+                                                    'View_Dream_User_Profile_On_tap');
+                                              },
+                                              child: DreamWidget(
+                                                key: Key(
+                                                    'Keyj8n_${listViewIndex}_of_${listViewDreamsRecordList.length}'),
+                                                dreamDoc: listViewDreamsRecord,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
                           ),
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Flexible(
+                                child: StreamBuilder<List<DreamsRecord>>(
+                                  stream: queryDreamsRecord(
+                                    queryBuilder: (dreamsRecord) => dreamsRecord
+                                        .where(
+                                          'uid',
+                                          isEqualTo: currentUserUid,
+                                        )
+                                        .where(
+                                          'isPublic',
+                                          isEqualTo: false,
+                                        ),
+                                  ),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50.0,
+                                          height: 50.0,
+                                          child: CircularProgressIndicator(
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                    List<DreamsRecord>
+                                        listViewDreamsRecordList =
+                                        snapshot.data!;
+
+                                    return InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        logFirebaseEvent(
+                                            'PROFILE_PAGE_ListView_esqooxa0_ON_TAP');
+                                        logFirebaseEvent(
+                                            'ListView_google_analytics_event');
+                                        logFirebaseEvent(
+                                            'Dream_On_Tap_Profile');
+                                      },
+                                      child: ListView.builder(
+                                        padding: EdgeInsets.zero,
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.vertical,
+                                        itemCount:
+                                            listViewDreamsRecordList.length,
+                                        itemBuilder: (context, listViewIndex) {
+                                          final listViewDreamsRecord =
+                                              listViewDreamsRecordList[
+                                                  listViewIndex];
+                                          return Padding(
+                                            padding: EdgeInsets.all(6.0),
+                                            child: InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                logFirebaseEvent(
+                                                    'PROFILE_PAGE_Container_jrhpf7jb_ON_TAP');
+                                                logFirebaseEvent(
+                                                    'Dream_navigate_to');
+
+                                                context.pushNamed(
+                                                  ViewDreamUserWidget.routeName,
+                                                  queryParameters: {
+                                                    'dreamDoc': serializeParam(
+                                                      listViewDreamsRecord,
+                                                      ParamType.Document,
+                                                    ),
+                                                  }.withoutNulls,
+                                                  extra: <String, dynamic>{
+                                                    'dreamDoc':
+                                                        listViewDreamsRecord,
+                                                  },
+                                                );
+
+                                                logFirebaseEvent(
+                                                    'Dream_google_analytics_event');
+                                                logFirebaseEvent(
+                                                    'View_Dream_User_Profile_On_tap');
+                                              },
+                                              child: DreamWidget(
+                                                key: Key(
+                                                    'Keyjrh_${listViewIndex}_of_${listViewDreamsRecordList.length}'),
+                                                dreamDoc: listViewDreamsRecord,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
-              ].divide(SizedBox(width: 50.0)),
-            ),
-            Text(
-              'Recent Posts',
-              style: FlutterFlowTheme.of(context).bodyLarge.override(
-                    fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
-                    letterSpacing: 0.0,
-                    useGoogleFonts: GoogleFonts.asMap().containsKey(
-                        FlutterFlowTheme.of(context).bodyLargeFamily),
-                  ),
-            ),
-            Flexible(
-              child: StreamBuilder<List<DreamsRecord>>(
-                stream: queryDreamsRecord(
-                  queryBuilder: (dreamsRecord) => dreamsRecord.where(
-                    'uid',
-                    isEqualTo: currentUserUid,
-                  ),
-                ),
-                builder: (context, snapshot) {
-                  // Customize what your widget looks like when it's loading.
-                  if (!snapshot.hasData) {
-                    return Center(
-                      child: SizedBox(
-                        width: 50.0,
-                        height: 50.0,
-                        child: CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            FlutterFlowTheme.of(context).primary,
-                          ),
-                        ),
-                      ),
-                    );
-                  }
-                  List<DreamsRecord> listViewDreamsRecordList = snapshot.data!;
-
-                  return InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      logFirebaseEvent('PROFILE_PAGE_ListView_cyybcfk7_ON_TAP');
-                      logFirebaseEvent('ListView_google_analytics_event');
-                      logFirebaseEvent('Dream_On_Tap_Profile');
-                    },
-                    child: ListView.builder(
-                      padding: EdgeInsets.zero,
-                      scrollDirection: Axis.vertical,
-                      itemCount: listViewDreamsRecordList.length,
-                      itemBuilder: (context, listViewIndex) {
-                        final listViewDreamsRecord =
-                            listViewDreamsRecordList[listViewIndex];
-                        return Padding(
-                          padding: EdgeInsets.all(6.0),
-                          child: Container(
-                            key: ValueKey('Dream_p4rs'),
-                            child: InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                logFirebaseEvent(
-                                    'PROFILE_PAGE_Container_oko485we_ON_TAP');
-                                logFirebaseEvent('Dream_navigate_to');
-
-                                context.pushNamed(
-                                  ViewDreamUserWidget.routeName,
-                                  queryParameters: {
-                                    'dreamDoc': serializeParam(
-                                      listViewDreamsRecord,
-                                      ParamType.Document,
-                                    ),
-                                  }.withoutNulls,
-                                  extra: <String, dynamic>{
-                                    'dreamDoc': listViewDreamsRecord,
-                                  },
-                                );
-
-                                logFirebaseEvent(
-                                    'Dream_google_analytics_event');
-                                logFirebaseEvent(
-                                    'View_Dream_User_Profile_On_tap');
-                              },
-                              child: DreamWidget(
-                                key: Key(
-                                    'Keyoko_${listViewIndex}_of_${listViewDreamsRecordList.length}'),
-                                dreamDoc: listViewDreamsRecord,
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  );
-                },
               ),
-            ),
-          ].divide(SizedBox(height: 10.0)).addToStart(SizedBox(height: 15.0)),
+            ].divide(SizedBox(height: 10.0)).addToStart(SizedBox(height: 15.0)),
+          ),
         ),
       ),
     );

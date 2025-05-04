@@ -4,6 +4,10 @@ import 'add_dream_widget.dart' show AddDreamWidget;
 import 'package:flutter/material.dart';
 
 class AddDreamModel extends FlutterFlowModel<AddDreamWidget> {
+  ///  Local state fields for this page.
+
+  bool selectedPrivacy = true;
+
   ///  State fields for stateful widgets in this page.
 
   final formKey = GlobalKey<FormState>();

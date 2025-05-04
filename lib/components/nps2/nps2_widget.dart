@@ -79,11 +79,8 @@ class _Nps2WidgetState extends State<Nps2Widget> {
               'Please list any recommendations or problems for the app.',
               textAlign: TextAlign.center,
               style: FlutterFlowTheme.of(context).headlineSmall.override(
-                    fontFamily:
-                        FlutterFlowTheme.of(context).headlineSmallFamily,
+                    font: FlutterFlowTheme.of(context).headlineSmall,
                     letterSpacing: 0.0,
-                    useGoogleFonts: GoogleFonts.asMap().containsKey(
-                        FlutterFlowTheme.of(context).headlineSmallFamily),
                   ),
             ),
             Container(
@@ -96,19 +93,13 @@ class _Nps2WidgetState extends State<Nps2Widget> {
                 decoration: InputDecoration(
                   isDense: true,
                   labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
-                        fontFamily:
-                            FlutterFlowTheme.of(context).labelMediumFamily,
+                        font: FlutterFlowTheme.of(context).labelMedium,
                         letterSpacing: 0.0,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).labelMediumFamily),
                       ),
                   hintText: 'Text Field',
                   hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
-                        fontFamily:
-                            FlutterFlowTheme.of(context).labelMediumFamily,
+                        font: FlutterFlowTheme.of(context).labelMedium,
                         letterSpacing: 0.0,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).labelMediumFamily),
                       ),
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
@@ -142,9 +133,17 @@ class _Nps2WidgetState extends State<Nps2Widget> {
                   fillColor: FlutterFlowTheme.of(context).secondaryBackground,
                 ),
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
-                      fontFamily: 'Exo 2',
+                      font: GoogleFonts.exo2(
+                        fontWeight:
+                            FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                        fontStyle:
+                            FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                      ),
                       letterSpacing: 0.0,
-                      useGoogleFonts: GoogleFonts.asMap().containsKey('Exo 2'),
+                      fontWeight:
+                          FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                      fontStyle:
+                          FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                     ),
                 maxLines: 4,
                 cursorColor: FlutterFlowTheme.of(context).primaryText,
@@ -164,10 +163,18 @@ class _Nps2WidgetState extends State<Nps2Widget> {
                 iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                 color: FlutterFlowTheme.of(context).primary,
                 textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                      fontFamily: 'Exo 2',
+                      font: GoogleFonts.exo2(
+                        fontWeight:
+                            FlutterFlowTheme.of(context).titleSmall.fontWeight,
+                        fontStyle:
+                            FlutterFlowTheme.of(context).titleSmall.fontStyle,
+                      ),
                       color: Colors.white,
                       letterSpacing: 0.0,
-                      useGoogleFonts: GoogleFonts.asMap().containsKey('Exo 2'),
+                      fontWeight:
+                          FlutterFlowTheme.of(context).titleSmall.fontWeight,
+                      fontStyle:
+                          FlutterFlowTheme.of(context).titleSmall.fontStyle,
                     ),
                 elevation: 0.0,
                 borderRadius: BorderRadius.circular(8.0),

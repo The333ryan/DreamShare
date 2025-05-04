@@ -4,17 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:dream_share/flutter_flow/flutter_flow_drop_down.dart';
-import 'package:dream_share/flutter_flow/flutter_flow_icon_button.dart';
-import 'package:dream_share/flutter_flow/flutter_flow_widgets.dart';
-import 'package:dream_share/flutter_flow/flutter_flow_theme.dart';
-import 'package:dream_share/index.dart';
-import 'package:dream_share/main.dart';
-import 'package:dream_share/flutter_flow/flutter_flow_util.dart';
+import 'package:dream_share_developmentation/flutter_flow/flutter_flow_drop_down.dart';
+import 'package:dream_share_developmentation/flutter_flow/flutter_flow_icon_button.dart';
+import 'package:dream_share_developmentation/flutter_flow/flutter_flow_widgets.dart';
+import 'package:dream_share_developmentation/flutter_flow/flutter_flow_theme.dart';
+import 'package:dream_share_developmentation/index.dart';
+import 'package:dream_share_developmentation/main.dart';
+import 'package:dream_share_developmentation/flutter_flow/flutter_flow_util.dart';
 
 import 'package:provider/provider.dart';
-import 'package:dream_share/backend/firebase/firebase_config.dart';
-import 'package:dream_share/auth/firebase_auth/auth_util.dart';
+import 'package:dream_share_developmentation/backend/firebase/firebase_config.dart';
+import 'package:dream_share_developmentation/auth/firebase_auth/auth_util.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 void main() async {
@@ -40,7 +40,7 @@ void main() async {
     await tester.pumpWidget(ChangeNotifierProvider(
       create: (context) => FFAppState(),
       child: MyApp(
-        entryPage: ProfileWidget(),
+        entryPage: OtherUserProfileWidget(),
       ),
     ));
     await GoogleFonts.pendingFonts();
@@ -180,20 +180,20 @@ void main() async {
       const Duration(milliseconds: 10),
     );
     await tester.enterText(
-        find.byKey(const ValueKey('TextField_h03y')), 'dream title test');
+        find.byKey(const ValueKey('UNDEFINED')), 'dream title test');
     await tester.pumpAndSettle(
       const Duration(milliseconds: 10000),
       EnginePhase.sendSemanticsUpdate,
       const Duration(milliseconds: 10),
     );
     await tester.enterText(
-        find.byKey(const ValueKey('TextField_iqmm')), 'Testing unit test');
+        find.byKey(const ValueKey('UNDEFINED')), 'Testing unit test');
     await tester.pumpAndSettle(
       const Duration(milliseconds: 10000),
       EnginePhase.sendSemanticsUpdate,
       const Duration(milliseconds: 10),
     );
-    await tester.tap(find.byKey(const ValueKey('Button_uozq')));
+    await tester.tap(find.byKey(const ValueKey('UNDEFINED')));
     await tester.pumpAndSettle(
       const Duration(milliseconds: 10000),
       EnginePhase.sendSemanticsUpdate,
@@ -201,7 +201,7 @@ void main() async {
     );
     await tester.tap(find.byIcon(Icons.person));
     await tester.pumpAndSettle(const Duration(milliseconds: 10000));
-    await tester.tap(find.byKey(const ValueKey('IconButton_eqf7')));
+    await tester.tap(find.byKey(const ValueKey('UNDEFINED')));
     await tester.pumpAndSettle(const Duration(milliseconds: 10000));
     await tester.tap(find.byKey(const ValueKey('Button_kd1j')));
     await tester.pumpAndSettle(const Duration(milliseconds: 10000));
