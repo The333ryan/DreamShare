@@ -75,7 +75,7 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
               image: Image.asset(
                 Theme.of(context).brightness == Brightness.dark
                     ? 'assets/images/DreamshareNightBack.jpg'
-                    : 'assets/images/DreamshareDayBack.jpg',
+                    : 'assets/images/dawid-zawila--G3rw6Y02D0-unsplash.jpg',
               ).image,
             ),
             shape: BoxShape.rectangle,

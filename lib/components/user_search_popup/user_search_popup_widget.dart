@@ -79,14 +79,12 @@ class _UserSearchPopupWidgetState extends State<UserSearchPopupWidget> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  AuthUserStreamWidget(
-                    builder: (context) => Text(
-                      currentUserDisplayName,
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            font: FlutterFlowTheme.of(context).bodyMedium,
-                            letterSpacing: 0.0,
-                          ),
-                    ),
+                  Text(
+                    '',
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          font: FlutterFlowTheme.of(context).bodyMedium,
+                          letterSpacing: 0.0,
+                        ),
                   ),
                   Text(
                     currentUserEmail,

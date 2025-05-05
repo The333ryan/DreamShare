@@ -66,7 +66,7 @@ class _OtherUserProfileWidgetState extends State<OtherUserProfileWidget> {
               image: Image.asset(
                 Theme.of(context).brightness == Brightness.dark
                     ? 'assets/images/DreamshareNightBack.jpg'
-                    : 'assets/images/DreamshareDayBack.jpg',
+                    : 'assets/images/dawid-zawila--G3rw6Y02D0-unsplash.jpg',
               ).image,
             ),
           ),

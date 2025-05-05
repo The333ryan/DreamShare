@@ -40,7 +40,7 @@ void main() async {
     await tester.pumpWidget(ChangeNotifierProvider(
       create: (context) => FFAppState(),
       child: MyApp(
-        entryPage: OtherUserProfileWidget(),
+        entryPage: ProfileWidget(),
       ),
     ));
     await GoogleFonts.pendingFonts();
@@ -114,6 +114,7 @@ void main() async {
     await tester.pump(kDoubleTapMinTime);
     await tester.tap(find.byKey(const ValueKey('Button_2x3f')));
     await tester.pumpAndSettle(const Duration(milliseconds: 5000));
+    expect(find.byKey(const ValueKey('DreamList_1bci')), findsOneWidget);
   });
 
   testWidgets('creating an account miss match pw', (WidgetTester tester) async {

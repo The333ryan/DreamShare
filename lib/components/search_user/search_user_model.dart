@@ -12,7 +12,8 @@ class SearchUserModel extends FlutterFlowModel<SearchUserWidget> {
   TextEditingController? textController;
   String? textFieldSelectedOption;
   String? Function(BuildContext, String?)? textControllerValidator;
-  List<UsersRecord> simpleSearchResults = [];
+  List<UsersRecord> simpleSearchResults1 = [];
+  List<UsersRecord> simpleSearchResults2 = [];
 
   @override
   void initState(BuildContext context) {}
