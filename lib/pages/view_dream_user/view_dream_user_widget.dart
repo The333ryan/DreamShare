@@ -326,6 +326,9 @@ class _ViewDreamUserWidgetState extends State<ViewDreamUserWidget> {
                                                           .bodyMedium
                                                           .fontStyle,
                                                 ),
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryBackground,
                                                 letterSpacing: 0.0,
                                                 fontWeight: FontWeight.w600,
                                                 fontStyle:

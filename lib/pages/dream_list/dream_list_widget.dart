@@ -621,7 +621,7 @@ class _DreamListWidgetState extends State<DreamListWidget>
                 ),
                 FlutterFlowAdBanner(
                   height: 50.0,
-                  showsTestAd: true,
+                  showsTestAd: false,
                   androidAdUnitID: 'ca-app-pub-8275745562074405/3884207984',
                 ),
               ],
